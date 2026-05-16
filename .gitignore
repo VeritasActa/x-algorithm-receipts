@@ -6,3 +6,4 @@ receipts/
 x-algorithm/
 .tmp/
 examples/*.private.jwk
+.tamper-tmp/
