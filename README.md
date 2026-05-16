@@ -110,23 +110,25 @@ See [`docs/audit-event-schema.md`](docs/audit-event-schema.md) and [`schemas/rec
 
 ## Why a wrapper, not a PR?
 
-At the time this was built, the upstream repository had no open issues, no open PRs, and pull request creation was restricted. A wrapper keeps the contribution vendor-neutral and avoids asking xAI to adopt any receipt format. If upstream wants a hook later, the minimal shape is an optional post-ranking audit event that external systems can sign however they choose.
+At the time this was built, the upstream repository had Issues, Discussions, Wiki, and external PR creation all disabled. A wrapper keeps the contribution vendor-neutral and avoids asking xAI to adopt any receipt format. If a channel ever opens upstream, the minimal shape is an optional post-ranking audit event that external systems can sign however they choose.
 
-## Proposed upstream hook
+## Proposed upstream hook (RFC)
+
+Full RFC: [#1 RFC: Add optional post-ranking audit event hook](https://github.com/VeritasActa/x-algorithm-receipts/issues/1).
 
 ```rust
-on_rank_complete(RankAuditEvent {
-    algorithm_commit,
-    model_artifact_hashes,
-    config_hash,
-    input_commitment,
-    output_root,
-    output_top_n_optional,
-    timestamp,
-})
+pub struct RankAuditEvent {
+    pub algorithm_commit: String,
+    pub model_artifacts: Vec<ArtifactRef>,
+    pub config_hash: String,
+    pub input_commitment: String,
+    pub output_root: String,
+    pub output_top_n_optional: Option<TopNOpening>,
+    pub timestamp: i64,
+}
 ```
 
-No signing requirement. No policy engine. No external service dependency. The hook only emits structured evidence; signing and anchoring stay outside the core ranking pipeline.
+No signing requirement. No policy engine. No external service dependency. The hook only emits structured evidence; signing and anchoring stay outside the core ranking pipeline. The RFC is filed here on the companion repo because upstream Issues are disabled; if xAI opens a channel, the proposal copies over verbatim.
 
 ## License
 
