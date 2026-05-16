@@ -1,0 +1,53 @@
+# Continuously verify the example receipt against the published verifier.
+#
+# Why this file exists:
+#   - Anyone reading the repo can see a green badge ("verify-receipt: passing")
+#     proving the receipt is valid right now, not just at commit time.
+#   - If we ever bump @veritasacta/verify or change the signing path and the
+#     receipt stops verifying, CI catches it before the demo silently breaks.
+#
+# Copy this file into your own recommender repo as
+# `.github/workflows/verify-receipt.yml`, point it at your receipt and JWKS,
+# and you get the same property: continuous CI proof that the receipt is valid.
+
+name: verify-receipt
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run daily to catch drift between the receipt and any upstream verifier
+    # changes (e.g. @veritasacta/verify ships a stricter rule).
+    - cron: '0 8 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify signature
+        run: |
+          npx -y @veritasacta/verify@0.6.1 \
+            examples/x-feed-demo.receipt.json \
+            --jwks examples/demo.jwks
+
+      - name: Inspect semantic fields
+        run: |
+          node scripts/inspect-receipt.mjs \
+            examples/x-feed-demo.receipt.json
+
+      - name: Run tamper-detection test
+        run: npm run tamper-demo || true
+        # The tamper demo intentionally exits non-zero on the tampered receipt
+        # (that is the success path). We tolerate non-zero here because the
+        # interesting signal is in the output, not the exit code. A future
+        # revision should split this into pass-then-fail assertions.

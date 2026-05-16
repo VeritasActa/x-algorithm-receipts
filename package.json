@@ -9,7 +9,9 @@
     "demo": "node scripts/run-x-algorithm-with-receipt.mjs --mock --receipt-out examples/x-feed-demo.receipt.json --jwks-out examples/demo.jwks",
     "verify:local": "node /Users/tomfarley/veritasacta-verify-github/cli.js examples/x-feed-demo.receipt.json --jwks examples/demo.jwks",
     "verify": "npx @veritasacta/verify examples/x-feed-demo.receipt.json --jwks examples/demo.jwks",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "tamper-demo": "node scripts/tamper-demo.mjs",
+    "repro-demo": "node scripts/reproducibility-demo.mjs"
   },
   "engines": {
     "node": ">=20"
