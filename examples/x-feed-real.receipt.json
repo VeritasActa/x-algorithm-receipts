@@ -1,0 +1,209 @@
+{
+  "v": 2,
+  "type": "recommender_rank_receipt",
+  "algorithm": "ed25519",
+  "kid": "x-algorithm-demo-8a20dedc542c",
+  "issuer": "did:web:scopeblind.com:examples:x-algorithm-receipts",
+  "issued_at": "2026-05-16T12:17:54.160Z",
+  "payload": {
+    "receipt_profile": "recommender.post_ranking.v1",
+    "event_kind": "post_ranking_audit_event",
+    "algorithm_repo": "https://github.com/xai-org/x-algorithm",
+    "algorithm_commit": "git:c3ef3307baea78655d0db2672cf2aa51a0381454",
+    "algorithm_worktree_dirty": false,
+    "pipeline": "phoenix/run_pipeline.py",
+    "execution_mode": "real",
+    "run_command": [
+      "uv",
+      "run",
+      "run_pipeline.py",
+      "--artifacts_dir",
+      "/Users/tomfarley/Documents/New project/x-algorithm-receipts/x-algorithm/phoenix/artifacts/oss-phoenix-artifacts",
+      "--sequence_file",
+      "/Users/tomfarley/Documents/New project/x-algorithm-receipts/x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/example_sequence.json",
+      "--corpus_file",
+      "/Users/tomfarley/Documents/New project/x-algorithm-receipts/x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/sports_corpus.npz",
+      "--top_k_retrieval",
+      "200",
+      "--top_k_display",
+      "30"
+    ],
+    "model_artifacts": [
+      {
+        "path": "phoenix/artifacts/oss-phoenix-artifacts/example_sequence.json",
+        "sha256": "sha256:ec53ed1d58f8b69aa6ee121e8cf1090e10e89cf4cd635ccf22b3d314d50838e7"
+      },
+      {
+        "path": "phoenix/artifacts/oss-phoenix-artifacts/ranker/config.json",
+        "sha256": "sha256:030b3c963a0e1a5061b2a79acb4c9bffb669cc6bfd96c7fa007d8b22b86979ec"
+      },
+      {
+        "path": "phoenix/artifacts/oss-phoenix-artifacts/ranker/embedding_tables.npz",
+        "sha256": "sha256:8742dbe1c395338862e8bd6455ebe3561034fb51ce846483b46040ce2cd23ec2"
+      },
+      {
+        "path": "phoenix/artifacts/oss-phoenix-artifacts/ranker/model_params.npz",
+        "sha256": "sha256:b7363205f4c5f66debff587a20f88564c6e7b8640d285a63c4a8d34995dbc598"
+      },
+      {
+        "path": "phoenix/artifacts/oss-phoenix-artifacts/retrieval/config.json",
+        "sha256": "sha256:08df7f803ee96a92f64d3aa8c666d6f1312f067c89cf49785373e131b347237a"
+      },
+      {
+        "path": "phoenix/artifacts/oss-phoenix-artifacts/retrieval/embedding_tables.npz",
+        "sha256": "sha256:1921c47f981d4029f900b71804ca23e0230286b4f8de1abcd7654a152801384a"
+      },
+      {
+        "path": "phoenix/artifacts/oss-phoenix-artifacts/retrieval/model_params.npz",
+        "sha256": "sha256:b71b44b25398b22328bd44f0b4b71f39ba14f9e9efb8e21b74d9c2b6584274f6"
+      },
+      {
+        "path": "phoenix/artifacts/oss-phoenix-artifacts/sports_corpus.npz",
+        "sha256": "sha256:80b7660f28e325bd2eccc9c8e7eae5e3a5d7cbe13089aa151824aa596fdb143e"
+      }
+    ],
+    "model_artifacts_root": "merkle-rfc6962-sha256:f2bf8621ed66bcc445228857e88f3dcb5fd42d3117e61284ca10e40d7324d888",
+    "config_hash": "sha256:2c97a5da32afa31138d4eab6b2a909734c8f02cab87022c147fe9432e7792c39",
+    "input_commitment": "merkle-rfc6962-sha256:e91ee0b3bd9e7366f5a58b0272b1b868197f2ae0d32e1701520ea4eca071bf6b",
+    "input_commitment_note": "Merkle root over sequence/corpus references. Production deployments should commit to feature vectors before ranking.",
+    "output_root": "merkle-rfc6962-sha256:049e86143f9cf05b6d3142a977bff028ce243cfb45859346a0a1601c107cbdc0",
+    "output_top_n_optional": {
+      "top_n": 30,
+      "items": [
+        {
+          "rank": 1,
+          "line": "========================================================================================================================"
+        },
+        {
+          "rank": 2,
+          "line": "PIPELINE RESULTS — User 12345"
+        },
+        {
+          "rank": 3,
+          "line": "History: 3 items | Corpus: 84564 posts"
+        },
+        {
+          "rank": 4,
+          "line": "Retrieved top 200 → Ranked by engagement model"
+        },
+        {
+          "rank": 5,
+          "line": "========================================================================================================================"
+        },
+        {
+          "rank": 6,
+          "line": "Rank  Score    Ret     Fav     Reply   RT      Dwell   VQV     Topics                         Post URL"
+        },
+        {
+          "rank": 7,
+          "line": "------------------------------------------------------------------------------------------------------------------------"
+        },
+        {
+          "rank": 8,
+          "line": "1     0.3922   0.8980  0.2930  0.0003  0.0114  0.4785  0.0781  Sports,NBA                     https://x.com/a/status/2055371034010726771"
+        },
+        {
+          "rank": 9,
+          "line": "2     0.3906   0.8892  0.2930  0.0002  0.0022  0.4844  0.1055  Sports                         https://x.com/a/status/2055373931960246693"
+        },
+        {
+          "rank": 10,
+          "line": "3     0.3836   0.8873  0.2930  0.0003  0.0033  0.4473  0.0498  Sports                         https://x.com/a/status/2055373509635797438"
+        },
+        {
+          "rank": 11,
+          "line": "4     0.3511   0.9382  0.2402  0.0009  0.0061  0.5430  0.1128  Sports,NBA                     https://x.com/a/status/2055335444297011304"
+        },
+        {
+          "rank": 12,
+          "line": "5     0.3284   0.9158  0.2314  0.0002  0.0025  0.4805  0.1250  Sports                         https://x.com/a/status/2055363262837821760"
+        },
+        {
+          "rank": 13,
+          "line": "6     0.3149   0.8931  0.2285  0.0001  0.0037  0.4258  0.0913  Sports                         https://x.com/a/status/2055361859520254016"
+        },
+        {
+          "rank": 14,
+          "line": "7     0.2975   0.8865  0.1973  0.0008  0.0125  0.4805  0.1177  Sports,Premier League          https://x.com/a/status/2055324672833491097"
+        },
+        {
+          "rank": 15,
+          "line": "8     0.2844   0.8835  0.1924  0.0003  0.0056  0.4512  0.1113  Sports,American Football       https://x.com/a/status/2055135488894546385"
+        },
+        {
+          "rank": 16,
+          "line": "9     0.2825   0.8965  0.1914  0.0004  0.0020  0.4512  0.1177  Sports                         https://x.com/a/status/2055341198764642324"
+        },
+        {
+          "rank": 17,
+          "line": "10    0.2775   0.9105  0.1729  0.0001  0.0074  0.5117  0.1318  Sports,NHL                     https://x.com/a/status/2055381228870594706"
+        },
+        {
+          "rank": 18,
+          "line": "11    0.2659   0.8968  0.1572  0.0006  0.0200  0.5117  0.1465  Sports,Baseball                https://x.com/a/status/2055356462411468890"
+        },
+        {
+          "rank": 19,
+          "line": "12    0.2647   0.8833  0.1826  0.0001  0.0040  0.4043  0.1025  Sports                         https://x.com/a/status/2055377759111659542"
+        },
+        {
+          "rank": 20,
+          "line": "13    0.2632   0.9055  0.1826  0.0003  0.0050  0.3945  0.0747  Sports                         https://x.com/a/status/2055381914471817631"
+        },
+        {
+          "rank": 21,
+          "line": "14    0.2591   0.8972  0.1631  0.0001  0.0010  0.4785  0.1484  Sports                         https://x.com/a/status/2055336362799239454"
+        },
+        {
+          "rank": 22,
+          "line": "15    0.2553   0.9057  0.1641  0.0006  0.0023  0.4512  0.0737  Sports                         https://x.com/a/status/2055335384406475212"
+        },
+        {
+          "rank": 23,
+          "line": "16    0.2548   0.8899  0.1426  0.0001  0.0092  0.5469  0.2080  Sports                         https://x.com/a/status/2055374768849785332"
+        },
+        {
+          "rank": 24,
+          "line": "17    0.2530   0.8899  0.1709  0.0006  0.0033  0.4043  0.1025  Sports,NBA                     https://x.com/a/status/2055347420788105262"
+        },
+        {
+          "rank": 25,
+          "line": "18    0.2522   0.8802  0.1592  0.0009  0.0078  0.4512  0.0264  Sports,Ice Hockey              https://x.com/a/status/2055377493776105921"
+        },
+        {
+          "rank": 26,
+          "line": "19    0.2485   0.8859  0.1523  0.0002  0.0065  0.4707  0.1143  Sports                         https://x.com/a/status/2055376487688073615"
+        },
+        {
+          "rank": 27,
+          "line": "20    0.2446   0.8920  0.1768  0.0002  0.0097  0.3242  0.0610  Sports                         https://x.com/a/status/2055346423781102007"
+        },
+        {
+          "rank": 28,
+          "line": "21    0.2418   0.8970  0.1445  0.0007  0.0145  0.4629  0.0850  Sports                         https://x.com/a/status/2055375168743051751"
+        },
+        {
+          "rank": 29,
+          "line": "22    0.2416   0.8791  0.1484  0.0001  0.0056  0.4570  0.1533  Sports                         https://x.com/a/status/2055374073572491315"
+        },
+        {
+          "rank": 30,
+          "line": "23    0.2414   0.8835  0.1602  0.0002  0.0035  0.4004  0.1387  Sports                         https://x.com/a/status/2055329057282080948"
+        }
+      ]
+    },
+    "selected_count": 39,
+    "stdout_hash": "sha256:9ccd6dba040f122ea849c4c20eb4324b45da192abec9f6310592a6b8a1aacfe8",
+    "stderr_hash": "sha256:b7e99369020962c9205dc4305d81b7f55ab5c2f7fb7da6ad5fc1ab0e8d1a751a",
+    "top_k_retrieval": 200,
+    "top_k_display": 30,
+    "runtime_environment": {
+      "wrapper": "ScopeBlind/x-algorithm-receipts@0.1.0",
+      "node": "v22.20.0",
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "caveat": "Receipts prove that a specific output was bound to specific code, model artifacts, config, and input commitments. They do not prove the output is fair, truthful, or beneficial."
+  },
+  "signature": "cfe4b24ca7a9da5dc2a3c96170fe2dd087b1836a183073da333adc5b92b6f719ab4805eb5011d5f98cbb6ce5a8f92fe12a7a656f757c199345e4e04e0e4b5000"
+}
