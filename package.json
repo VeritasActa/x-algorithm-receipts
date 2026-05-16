@@ -1,0 +1,25 @@
+{
+  "name": "x-algorithm-receipts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Post-ranking signed receipt wrapper for the published xAI/X For You algorithm demo pipeline.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "demo": "node scripts/run-x-algorithm-with-receipt.mjs --mock --receipt-out examples/x-feed-demo.receipt.json --jwks-out examples/demo.jwks",
+    "verify:local": "node /Users/tomfarley/veritasacta-verify-github/cli.js examples/x-feed-demo.receipt.json --jwks examples/demo.jwks",
+    "verify": "npx @veritasacta/verify examples/x-feed-demo.receipt.json --jwks examples/demo.jwks",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "x-algorithm",
+    "recommender-systems",
+    "audit",
+    "signed-receipts",
+    "veritas-acta",
+    "scopeblind"
+  ]
+}

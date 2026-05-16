@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scopeblind.com/schemas/recommender-post-ranking-v1.schema.json",
+  "title": "Recommender post-ranking audit event v1",
+  "type": "object",
+  "required": [
+    "receipt_profile",
+    "event_kind",
+    "algorithm_repo",
+    "algorithm_commit",
+    "pipeline",
+    "model_artifacts",
+    "model_artifacts_root",
+    "config_hash",
+    "input_commitment",
+    "output_root",
+    "selected_count",
+    "caveat"
+  ],
+  "properties": {
+    "receipt_profile": { "const": "recommender.post_ranking.v1" },
+    "event_kind": { "const": "post_ranking_audit_event" },
+    "algorithm_repo": { "type": "string", "format": "uri" },
+    "algorithm_commit": { "type": "string", "pattern": "^git:.+" },
+    "pipeline": { "type": "string", "minLength": 1 },
+    "execution_mode": { "type": "string", "enum": ["mock", "real"] },
+    "model_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "model_artifacts_root": { "type": "string", "pattern": "^merkle-rfc6962-sha256:[0-9a-f]{64}$" },
+    "config_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "input_commitment": { "type": "string", "pattern": "^merkle-rfc6962-sha256:[0-9a-f]{64}$" },
+    "output_root": { "type": "string", "pattern": "^merkle-rfc6962-sha256:[0-9a-f]{64}$" },
+    "output_top_n_optional": {
+      "type": "object",
+      "properties": {
+        "top_n": { "type": "integer", "minimum": 0 },
+        "items": { "type": "array" }
+      },
+      "additionalProperties": true
+    },
+    "selected_count": { "type": "integer", "minimum": 0 },
+    "caveat": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": true
+}
