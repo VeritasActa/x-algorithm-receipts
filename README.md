@@ -4,49 +4,64 @@ Open source shows what could run. Receipts prove what did run.
 
 This repo is a small receipt wrapper for the published [`xai-org/x-algorithm`](https://github.com/xai-org/x-algorithm) demo pipeline. It does not modify X's repo and it does not claim to audit production X. It shows the missing verifiability layer: a specific ranking run can be bound to a code commit, model artifact hashes, config hash, input commitment, output Merkle root, and Ed25519 signature.
 
+![Verifier output showing a valid signature for the mock-mode demo receipt, with the Sigil visual fingerprint and full payload details.](screenshots/01-verifier-valid.png)
+
+Three commands to install, verify, inspect:
+
+```sh
+npm install
+npm run demo                                                        # generate mock receipt
+npx @veritasacta/verify examples/x-feed-demo.receipt.json \
+  --jwks examples/demo.jwks                                         # verify offline
+node scripts/inspect-receipt.mjs examples/x-feed-demo.receipt.json  # inspect semantic fields
+```
+
+No accounts, no API keys, no cloud calls. The verifier is open-source Apache-2.0 on npm (`@veritasacta/verify`). The receipt format is documented as an active IETF Internet-Draft, `draft-farley-acta-signed-receipts`.
+
 ## What this proves
 
 A valid receipt proves that a specific output was bound to specific code, model artifacts, config, and input commitments at signing time.
 
 It does not prove that the ranking was fair, truthful, beneficial, unbiased, legally sufficient, or actually used in production. Those are different audit problems.
 
-## Quick demo, no X artifacts required
+## Receipt inspection (semantic fields)
 
-The mock demo creates a synthetic Phoenix-style ranking event, signs it, and verifies the receipt offline.
+![Inspector output listing the bound algorithm repo, commit, pipeline, model artifacts, hashes, and disclosure counts.](screenshots/02-inspector.png)
+
+## Tamper detection
+
+Flip one character anywhere in the signed payload and the verifier rejects the receipt with a spec-cited error.
+
+![Tamper demo: a valid receipt becomes invalid after one character of the payload is modified; the verifier returns INVALID with the `invalid_signature` error code.](screenshots/03-tamper-rejected.png)
 
 ```sh
-npm run demo
-npm run verify
-node scripts/inspect-receipt.mjs examples/x-feed-demo.receipt.json
+npm run tamper-demo
 ```
 
-Expected verifier shape:
+This is the core security property of signed receipts: any change to any committed field (algorithm commit, model hashes, config, input, output) invalidates the signature. There is no way to selectively edit the payload without re-signing it.
 
-```text
-✓ Signature: VALID
-  Format:     v2 (draft-farley-acta-signed-receipts-03)
-  Type:       recommender_rank_receipt
-  Algorithm:  ed25519
-  Tier:       T1 basic (ed25519-signature, jcs-canonicalization)
-  No servers were contacted.
+## Reproducibility
+
+Run the wrapper twice with the same input. The two receipts have different `issued_at` timestamps and signatures, but the cryptographic commitments to the input and the ranked output match exactly.
+
+![Reproducibility demo: two independent runs produce identical input_commitment and output_root, but different timestamps and signatures.](screenshots/04-reproducibility.png)
+
+```sh
+npm run repro-demo
 ```
 
-Expected receipt inspection shape:
+This is the property no production recommender system currently exposes externally: "anyone with the same code, model artifacts, config, and input can re-run and verify the same output, cryptographically." Committed pair lives in [`examples/reproducibility-pair/`](examples/reproducibility-pair/).
 
-```text
-✓ algorithm repo         https://github.com/xai-org/x-algorithm
-✓ algorithm commit       git:published-demo-mock-2026-05-15
-✓ pipeline               phoenix/run_pipeline.py
-✓ model artifacts        5 file commitment(s)
-✓ input commitment       merkle-rfc6962-sha256:...
-✓ output root            merkle-rfc6962-sha256:...
-✓ selected count         50
-✓ top-N disclosed        10
+## Real mode against an actual Phoenix pipeline (v0.2.0)
+
+The repo ships a real-mode receipt at [`examples/x-feed-real.receipt.json`](examples/x-feed-real.receipt.json) bound to a real ranking pass against `xai-org/x-algorithm@c3ef3307baea78655d0db2672cf2aa51a0381454`. Verify it the same way as the mock receipt:
+
+```sh
+npx @veritasacta/verify examples/x-feed-real.receipt.json --jwks examples/real.jwks
+node scripts/inspect-receipt.mjs examples/x-feed-real.receipt.json
 ```
 
-## Real mode against a local x-algorithm checkout
-
-Clone the X algorithm repo and download/extract its Phoenix artifacts as described upstream. Then run:
+To reproduce yourself, clone X's repo, download the Phoenix artifacts (2.9 GB via Git LFS), and run the wrapper:
 
 ```sh
 git clone https://github.com/xai-org/x-algorithm.git ./x-algorithm
@@ -63,7 +78,13 @@ npx @veritasacta/verify receipts/x-feed-real.receipt.json --jwks receipts/x-feed
 node scripts/inspect-receipt.mjs receipts/x-feed-real.receipt.json
 ```
 
-The real wrapper executes `uv run run_pipeline.py` inside `x-algorithm/phoenix`, captures stdout/stderr digests, hashes model/config/corpus files, commits to the input files, commits to the ranked output lines, signs the event, and writes a local JWKS for offline verification.
+The real wrapper executes `uv run run_pipeline.py` inside `x-algorithm/phoenix`, captures stdout/stderr digests, hashes all model and config and corpus files, commits to the input files, commits to the ranked output lines, signs the event, and writes a local JWKS for offline verification.
+
+In real mode, `output_top_n_optional.items` contains the literal pipeline output lines (which include the ranked-results table). The signed commitment is over the exact bytes the pipeline printed, so a re-runner who gets a different output will produce a different `output_root` and the receipts will not match. Structured parsing of the ranking items (rank/post_id/score per line) is a planned v0.3.0 feature.
+
+## Browser verifier (no CLI required)
+
+Drop a receipt and JWKS at https://www.scopeblind.com/verify-receipt. Pure client-side verification using `@noble/curves` from a CDN, no servers contacted.
 
 ## Receipt profile
 
