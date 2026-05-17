@@ -20,7 +20,15 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
-const PAIR_DIR = resolve(REPO_ROOT, 'examples/reproducibility-pair');
+
+// Default to a gitignored temp folder so re-running the demo does not dirty
+// the committed example pair. To intentionally regenerate the committed
+// examples (e.g. after changing the wrapper), pass `--update-committed`.
+const UPDATE_COMMITTED = process.argv.includes('--update-committed');
+const PAIR_DIR = resolve(
+  REPO_ROOT,
+  UPDATE_COMMITTED ? 'examples/reproducibility-pair' : '.repro-tmp',
+);
 
 if (!existsSync(PAIR_DIR)) mkdirSync(PAIR_DIR, { recursive: true });
 

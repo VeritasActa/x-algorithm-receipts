@@ -1,8 +1,14 @@
 # x-algorithm-receipts
 
+[![verify-receipt](https://github.com/VeritasActa/x-algorithm-receipts/actions/workflows/verify-receipt.yml/badge.svg)](https://github.com/VeritasActa/x-algorithm-receipts/actions/workflows/verify-receipt.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![IETF draft](https://img.shields.io/badge/IETF-draft--farley--acta--signed--receipts-orange)](https://datatracker.ietf.org/doc/draft-farley-acta-signed-receipts/)
+
 Open source shows what could run. Receipts prove what did run.
 
-This repo is a small receipt wrapper for the published [`xai-org/x-algorithm`](https://github.com/xai-org/x-algorithm) demo pipeline. It does not modify X's repo and it does not claim to audit production X. It shows the missing verifiability layer: a specific ranking run can be bound to a code commit, model artifact hashes, config hash, input commitment, output Merkle root, and Ed25519 signature.
+This repo is a small receipt wrapper for the published [`xai-org/x-algorithm`](https://github.com/xai-org/x-algorithm) demo pipeline. It does not modify X's repo and it does not claim to audit production X. It demonstrates **execution binding**: a specific ranking run can be cryptographically bound to a code commit, model artifact hashes, config hash, input commitment, output Merkle root, and Ed25519 signature.
+
+> **What this proves: execution binding, not ranking quality.** The receipt proves that a specific output was bound to specific code, model artifacts, config, and input commitments at signing time. It does not prove the output is fair, truthful, or beneficial. See [LIMITATIONS.md](LIMITATIONS.md) for the full caveat list.
 
 ![Verifier output showing a valid signature for the mock-mode demo receipt, with the Sigil visual fingerprint and full payload details.](screenshots/01-verifier-valid.png)
 
@@ -50,7 +56,9 @@ Run the wrapper twice with the same input. The two receipts have different `issu
 npm run repro-demo
 ```
 
-This is the property no production recommender system currently exposes externally: "anyone with the same code, model artifacts, config, and input can re-run and verify the same output, cryptographically." Committed pair lives in [`examples/reproducibility-pair/`](examples/reproducibility-pair/).
+This demonstrates how reproducibility can be made **cryptographically checkable** when the same input and artifacts are re-run. Whether a production recommender is itself reproducible is a property of that system, not of the receipt format. The receipt makes any mismatch immediately visible field-by-field. See [LIMITATIONS.md](LIMITATIONS.md#reproducibility-mock-vs-reproducibility-production) for the mock-vs-production distinction.
+
+Committed pair lives in [`examples/reproducibility-pair/`](examples/reproducibility-pair/). To regenerate (with fresh timestamps) the committed example pair, run `npm run repro-demo -- --update-committed`. By default, the script writes to a gitignored `.repro-tmp/` directory so re-runs don't dirty the committed examples.
 
 ## Real mode against an actual Phoenix pipeline (v0.2.0)
 
@@ -78,13 +86,13 @@ npx @veritasacta/verify receipts/x-feed-real.receipt.json --jwks receipts/x-feed
 node scripts/inspect-receipt.mjs receipts/x-feed-real.receipt.json
 ```
 
-The real wrapper executes `uv run run_pipeline.py` inside `x-algorithm/phoenix`, captures stdout/stderr digests, hashes all model and config and corpus files, commits to the input files, commits to the ranked output lines, signs the event, and writes a local JWKS for offline verification.
+The real wrapper executes `uv run run_pipeline.py` inside `x-algorithm/phoenix` as a subprocess, hashes all model and config and corpus files, captures the exact stdout (and stderr) bytes the pipeline produced, signs the audit event, and writes a local JWKS for offline verification.
 
-In real mode, `output_top_n_optional.items` contains the literal pipeline output lines (which include the ranked-results table). The signed commitment is over the exact bytes the pipeline printed, so a re-runner who gets a different output will produce a different `output_root` and the receipts will not match. Structured parsing of the ranking items (rank/post_id/score per line) is a planned v0.3.0 feature.
+**Wording precision matters here:** real mode commits to the **exact Phoenix pipeline output bytes**. It does **not** commit to parsed structured `{rank, post_id, score}` records. A re-runner who reproduces the exact pipeline output reproduces the same `output_root`; a re-runner who gets even minor formatting drift produces a different `output_root` and the receipts do not match. Structured per-item parsing is open work for v0.3.0. See [LIMITATIONS.md](LIMITATIONS.md#real-mode-commits-to-pipeline-output-bytes-not-parsed-records) for the full nuance.
 
 ## Browser verifier (no CLI required)
 
-Drop a receipt and JWKS at https://www.scopeblind.com/verify-receipt. Pure client-side verification using `@noble/curves` from a CDN, no servers contacted.
+Drop a receipt and JWKS at https://www.scopeblind.com/verify-receipt. Receipt contents are verified locally in your browser using `@noble/curves`; receipt contents are not uploaded. (Static assets load from Cloudflare Pages and the optional "Load example" button fetches from jsDelivr.)
 
 ## Receipt profile
 
