@@ -24,6 +24,28 @@ node scripts/inspect-receipt.mjs examples/x-feed-demo.receipt.json  # inspect se
 
 No accounts, no API keys, no cloud calls. The verifier is open-source Apache-2.0 on npm (`@veritasacta/verify`). The receipt format is documented as an active IETF Internet-Draft, `draft-farley-acta-signed-receipts`.
 
+## Deployment/version receipts (lowest-friction X feature)
+
+The easiest production-facing feature is not per-user feed receipts. It is a signed deployment receipt: X could publish a public receipt proving that rollout `R` used algorithm commit `C`, model artifact root `M`, config hash `H`, and policy bundle `P` during time window `T`.
+
+```sh
+npm run deployment-demo
+npx @veritasacta/verify examples/deployment-version/deployment.receipt.json \
+  --jwks examples/deployment-version/deployment.jwks
+npx @veritasacta/verify examples/deployment-version/feed-session-certificate.receipt.json \
+  --jwks examples/deployment-version/deployment.jwks
+```
+
+Fixtures live in [`examples/deployment-version/`](examples/deployment-version/):
+
+| Fixture | Purpose |
+|---|---|
+| `deployment.receipt.json` | Public production-version-style receipt for algorithm/model/config/policy bundle metadata. |
+| `feed-session-certificate.receipt.json` | User-facing certificate showing what a Premium user could see without exposing user features or ranked output. |
+| `deployment.jwks` | Public key for both demo receipts. |
+
+This is the cleanest first pitch to X: **open source shows the algorithm; deployment receipts prove which version was active.** See [`docs/deployment-version-receipts.md`](docs/deployment-version-receipts.md).
+
 ## What this proves
 
 A valid receipt proves that a specific output was bound to specific code, model artifacts, config, and input commitments at signing time.

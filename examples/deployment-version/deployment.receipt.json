@@ -1,0 +1,104 @@
+{
+  "v": 2,
+  "type": "recommender_deployment_receipt",
+  "algorithm": "ed25519",
+  "kid": "x-algorithm-demo-8a20dedc542c",
+  "issuer": "did:web:scopeblind.com:examples:x-algorithm-receipts",
+  "issued_at": "2026-05-17T12:00:00.000Z",
+  "payload": {
+    "receipt_profile": "recommender.deployment_version.v1",
+    "event_kind": "algorithm_deployment_receipt",
+    "public_metadata": {
+      "service": "x-for-you-feed",
+      "environment": "production-version-demo",
+      "deployment_id": "x-for-you-phoenix-demo-2026-05-15",
+      "valid_from": "2026-05-17T12:00:00.000Z",
+      "valid_until": "2026-05-24T12:00:00.000Z",
+      "rollout": "example: canary-or-public-production-window"
+    },
+    "algorithm": {
+      "repo": "https://github.com/xai-org/x-algorithm",
+      "commit": "git:0bfc2795d308f90032544322747caacd535f75ae",
+      "source_root": "merkle-rfc6962-sha256:de7a8b4dc7686feee006374f755cfda538a77d4777470e49664d68edca05c7f1",
+      "worktree_dirty": false
+    },
+    "runtime": {
+      "pipeline": "phoenix/run_pipeline.py",
+      "structured_output_version": "phoenix-table-v1",
+      "source_receipt": "sha256:7da66789c1cebe3b9db650c1b3882d196411eb74b75ff663d7d2c3e2325c77e4"
+    },
+    "model_bundle": {
+      "artifacts_root": "merkle-rfc6962-sha256:821776ba371c3eb8afd2820db41a40bdfd51bd57d7ef589d45ffd164309abb08",
+      "artifact_count": 8,
+      "sample_artifacts": [
+        {
+          "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/example_sequence.json",
+          "sha256": "sha256:ec53ed1d58f8b69aa6ee121e8cf1090e10e89cf4cd635ccf22b3d314d50838e7"
+        },
+        {
+          "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/ranker/config.json",
+          "sha256": "sha256:030b3c963a0e1a5061b2a79acb4c9bffb669cc6bfd96c7fa007d8b22b86979ec"
+        },
+        {
+          "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/ranker/embedding_tables.npz",
+          "sha256": "sha256:8742dbe1c395338862e8bd6455ebe3561034fb51ce846483b46040ce2cd23ec2"
+        },
+        {
+          "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/ranker/model_params.npz",
+          "sha256": "sha256:b7363205f4c5f66debff587a20f88564c6e7b8640d285a63c4a8d34995dbc598"
+        },
+        {
+          "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/retrieval/config.json",
+          "sha256": "sha256:08df7f803ee96a92f64d3aa8c666d6f1312f067c89cf49785373e131b347237a"
+        }
+      ]
+    },
+    "config": {
+      "config_hash": "sha256:9cdfa0c5c38dde0315df11fc67832bc5687c2db37f500b1ccb7d094d97cff12f",
+      "algorithm_source_note": "algorithm source was a standalone git checkout."
+    },
+    "policy_bundle": {
+      "root": "merkle-rfc6962-sha256:949f4267d17be3909eedde3cfa7905c65b47bdc1b43f4f088f4f6496e5c62274",
+      "components": [
+        {
+          "name": "visibility-filtering",
+          "version": "demo-2026-05-15",
+          "commitment": "sha256:e7bb146bbae7f36ecae65ab1da2fea82b2b1757e6773de7762a929416ed6ed48",
+          "disclosed": false,
+          "purpose": "Commitment to post-selection visibility policy bundle without publishing private enforcement rules."
+        },
+        {
+          "name": "brand-safety-and-ads-blending",
+          "version": "demo-2026-05-15",
+          "commitment": "sha256:eb376501affccd07bd40d890c13f67ea0c89817e980979e27a9f253d18f9d710",
+          "disclosed": false,
+          "purpose": "Commitment to ad-placement and brand-safety configuration active for this rollout."
+        },
+        {
+          "name": "grox-content-understanding",
+          "version": "demo-2026-05-15",
+          "commitment": "sha256:b3893179198087425d1ef16ca583a413fe50dc14deb877f2fac25b32b23928bf",
+          "disclosed": false,
+          "purpose": "Commitment to classifier/embedder configuration used for content-understanding stages."
+        }
+      ]
+    },
+    "public_user_facing_fields": [
+      "deployment_id",
+      "valid_from",
+      "algorithm.commit",
+      "model_bundle.artifacts_root",
+      "config.config_hash",
+      "policy_bundle.root"
+    ],
+    "private_fields_committed_not_disclosed": [
+      "viewer identity",
+      "viewer feature vector",
+      "candidate set",
+      "raw policy internals",
+      "ranking output for a specific user"
+    ],
+    "caveat": "Demo deployment receipt only. It shows how X could prove which algorithm/model/config/policy bundle was active during a production window without disclosing user data. It is not a claim about production X."
+  },
+  "signature": "f3ec152bdd0f02d34f3a4289cb86b14e8a937e806108ab254a98f58bb186282c70d3808f3d09a3f788db534a02875e4523e4b4324dcafc4ab37594b1e390630f"
+}

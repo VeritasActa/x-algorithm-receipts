@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.5.0 - 2026-05-17
+
+- Added a deployment/version receipt demo, the lowest-friction X-facing feature.
+- Added `scripts/deployment-receipt-demo.mjs`, which derives a public production-version-style receipt from the real Phoenix receipt.
+- Added a user-facing feed-session certificate example for algorithm/model/config/policy metadata without exposing user features or ranked output.
+- Added committed fixtures under `examples/deployment-version/`.
+- Added `docs/deployment-version-receipts.md` and `docs/x-maintainer-email.md`.
+
 ## v0.4.0 - 2026-05-17
 
 - Added a local BRASS/VOPRF-gated disclosure demo for the recommender receipt.

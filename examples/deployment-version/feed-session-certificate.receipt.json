@@ -1,0 +1,41 @@
+{
+  "v": 2,
+  "type": "for_you_feed_version_certificate",
+  "algorithm": "ed25519",
+  "kid": "x-algorithm-demo-8a20dedc542c",
+  "issuer": "did:web:scopeblind.com:examples:x-algorithm-receipts",
+  "issued_at": "2026-05-17T12:00:00.000Z",
+  "payload": {
+    "receipt_profile": "recommender.feed_version_certificate.v1",
+    "event_kind": "for_you_feed_version_certificate",
+    "certificate_id": "demo-feed-certificate-2026-05-17-001",
+    "issued_at": "2026-05-17T12:00:00.000Z",
+    "deployment_receipt_hash": "sha256:1967b28bcae8667647c2fa22971ea564194d0c4510dcd1334c34914aeeedea9d",
+    "disclosed_to_user": {
+      "service": "x-for-you-feed",
+      "deployment_id": "x-for-you-phoenix-demo-2026-05-15",
+      "valid_from": "2026-05-17T12:00:00.000Z",
+      "algorithm_commit": "git:0bfc2795d308f90032544322747caacd535f75ae",
+      "model_artifacts_root": "merkle-rfc6962-sha256:821776ba371c3eb8afd2820db41a40bdfd51bd57d7ef589d45ffd164309abb08",
+      "config_hash": "sha256:9cdfa0c5c38dde0315df11fc67832bc5687c2db37f500b1ccb7d094d97cff12f",
+      "policy_bundle_root": "merkle-rfc6962-sha256:949f4267d17be3909eedde3cfa7905c65b47bdc1b43f4f088f4f6496e5c62274"
+    },
+    "private_session_commitment": "merkle-rfc6962-sha256:eac5edc258f5bd7a43e5d25e76e2e14f757a3e73eb14c4ff9e669b3b198b64a8",
+    "private_session_inputs": [
+      {
+        "name": "viewer_id",
+        "commitment": "sha256:898a52c6488b6ad9e8402adc1cdd4d1396913fe26163838c4d5b03aa7a0c4916"
+      },
+      {
+        "name": "request_id",
+        "commitment": "sha256:077833763ab70b71201f05fa5f360415d8761c3ad15b16d4a6ad8601a82065d8"
+      },
+      {
+        "name": "candidate_set",
+        "commitment": "merkle-rfc6962-sha256:f4c9cd2d07168e2fa33ece3311ce29dfd8bda9a52e8cfbeefb390fd75a7e1772"
+      }
+    ],
+    "caveat": "User-facing version certificate demo. It proves version metadata was signed and committed, not that this was displayed to any real X user or used in production."
+  },
+  "signature": "2e9a8749839ff302a0323323c3a392dc05864926ad74e8b37878ac22fd1dcb05107a0dc10c901d3d40b3c27cbdb7d18cbb64ba9c4fe19e3c6eaa1f37948d9e0a"
+}

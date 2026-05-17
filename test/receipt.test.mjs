@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { generateKeyPairSync } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import { canonicalize, merkleProof, merkleRoot, publicJwksFromPrivateJwk, signReceipt, verifyMerkleProof, verifyReceiptLocally } from '../scripts/lib.mjs';
+import { canonicalHash, canonicalize, merkleProof, merkleRoot, publicJwksFromPrivateJwk, signReceipt, verifyMerkleProof, verifyReceiptLocally } from '../scripts/lib.mjs';
+import { buildDeploymentPayload, buildFeedCertificatePayload } from '../scripts/deployment-receipt-demo.mjs';
 import { buildStdoutLineItems, parsePhoenixRankingOutput } from '../scripts/phoenix-parser.mjs';
 import { createDemoIssuer, issueDemoToken, verifyDemoVoprfToken } from '../scripts/voprf-demo-crypto.mjs';
 
@@ -117,4 +118,45 @@ test('committed gated disclosure fixture opens top-10 rows against real receipt 
   disclosure.disclosed_items.forEach((item, index) => {
     assert.equal(verifyMerkleProof(item, disclosure.merkle_openings[index], receipt.payload.ranked_items_root), true);
   });
+});
+
+test('deployment receipt fixture verifies and binds the real Phoenix receipt version metadata', () => {
+  const rankReceipt = JSON.parse(readFileSync(new URL('../examples/x-feed-real.receipt.json', import.meta.url), 'utf8'));
+  const deploymentReceipt = JSON.parse(readFileSync(new URL('../examples/deployment-version/deployment.receipt.json', import.meta.url), 'utf8'));
+  const jwks = JSON.parse(readFileSync(new URL('../examples/deployment-version/deployment.jwks', import.meta.url), 'utf8'));
+
+  assert.equal(verifyReceiptLocally(deploymentReceipt, jwks.keys[0]), true);
+  assert.equal(deploymentReceipt.type, 'recommender_deployment_receipt');
+  assert.equal(deploymentReceipt.payload.receipt_profile, 'recommender.deployment_version.v1');
+  assert.equal(deploymentReceipt.payload.algorithm.commit, rankReceipt.payload.algorithm_commit);
+  assert.equal(deploymentReceipt.payload.model_bundle.artifacts_root, rankReceipt.payload.model_artifacts_root);
+  assert.equal(deploymentReceipt.payload.config.config_hash, rankReceipt.payload.config_hash);
+  assert.match(deploymentReceipt.payload.policy_bundle.root, /^merkle-rfc6962-sha256:[0-9a-f]{64}$/);
+});
+
+test('feed session certificate fixture verifies and references the deployment receipt', () => {
+  const deploymentReceipt = JSON.parse(readFileSync(new URL('../examples/deployment-version/deployment.receipt.json', import.meta.url), 'utf8'));
+  const certificate = JSON.parse(readFileSync(new URL('../examples/deployment-version/feed-session-certificate.receipt.json', import.meta.url), 'utf8'));
+  const jwks = JSON.parse(readFileSync(new URL('../examples/deployment-version/deployment.jwks', import.meta.url), 'utf8'));
+
+  assert.equal(verifyReceiptLocally(certificate, jwks.keys[0]), true);
+  assert.equal(certificate.type, 'for_you_feed_version_certificate');
+  assert.equal(certificate.payload.receipt_profile, 'recommender.feed_version_certificate.v1');
+  assert.equal(certificate.payload.deployment_receipt_hash, canonicalHash(deploymentReceipt));
+  assert.equal(certificate.payload.disclosed_to_user.algorithm_commit, deploymentReceipt.payload.algorithm.commit);
+  assert.match(certificate.payload.private_session_commitment, /^merkle-rfc6962-sha256:[0-9a-f]{64}$/);
+});
+
+test('deployment payload builders preserve version metadata', () => {
+  const rankReceipt = JSON.parse(readFileSync(new URL('../examples/x-feed-real.receipt.json', import.meta.url), 'utf8'));
+  const deployment = buildDeploymentPayload({ rankReceipt, issuedAt: '2026-05-17T12:00:00.000Z' });
+  const { publicKey, privateKey } = generateKeyPairSync('ed25519');
+  const privateJwk = { ...privateKey.export({ format: 'jwk' }), kid: 'deployment-test-key', alg: 'EdDSA', use: 'sig' };
+  privateJwk.x = publicKey.export({ format: 'jwk' }).x;
+  const deploymentReceipt = signReceipt('recommender_deployment_receipt', deployment, privateJwk, { issued_at: '2026-05-17T12:00:00.000Z' }).artifact;
+  const certificate = buildFeedCertificatePayload({ deployment, deploymentReceipt, rankReceipt, issuedAt: '2026-05-17T12:00:00.000Z' });
+
+  assert.equal(deployment.algorithm.commit, rankReceipt.payload.algorithm_commit);
+  assert.equal(certificate.disclosed_to_user.policy_bundle_root, deployment.policy_bundle.root);
+  assert.equal(certificate.deployment_receipt_hash, canonicalHash(deploymentReceipt));
 });
