@@ -1,0 +1,52 @@
+{
+  "profile": "scopeblind.recommender.unlinkability-demo.v1",
+  "demo_mode": true,
+  "same_approved_researcher": "researcher-42",
+  "issuer_view": [
+    {
+      "issuance": "A",
+      "kid": "scopeblind-demo-voprf-2026",
+      "blinded_request": "ujpuvkNk6WSxH6PJ",
+      "issued_evaluation": "293N7PC_sPISmx_B",
+      "sees_receipt_id": false,
+      "sees_policy": false,
+      "note": "The issuer signs the blinded element M. It does not learn the redemption scope or later nullifier."
+    },
+    {
+      "issuance": "B",
+      "kid": "scopeblind-demo-voprf-2026",
+      "blinded_request": "aAtPLd4jw7Y6TskG",
+      "issued_evaluation": "lZsXhN2FhshzdE27",
+      "sees_receipt_id": false,
+      "sees_policy": false,
+      "note": "The issuer signs the blinded element M. It does not learn the redemption scope or later nullifier."
+    }
+  ],
+  "verifier_view": [
+    {
+      "redemption": "A",
+      "receipt_id_hint": "sha256:receipt-real-x-feed",
+      "policy": "dsa-researcher:top-10",
+      "nullifier_hint": "Pf_RQtgYItj5RgVkVt...",
+      "dleq": {
+        "issuer": true,
+        "client": true
+      }
+    },
+    {
+      "redemption": "B",
+      "receipt_id_hint": "sha256:receipt-second-sample",
+      "policy": "dsa-researcher:top-5",
+      "nullifier_hint": "t5B_SclCOt4vOfiHem...",
+      "dleq": {
+        "issuer": true,
+        "client": true
+      }
+    }
+  ],
+  "naive_signed_token_contrast": {
+    "subject": "researcher-42",
+    "problem": "A normal signed bearer token would carry a stable subject or account identifier, making redemptions linkable by default."
+  },
+  "conclusion": "The issuer sees issuance events for an approved researcher, but the verifier-side nullifiers are scope-specific and do not reveal which blinded issuance created them. Linkability inside one verifier scope is still intentional for rate limiting."
+}

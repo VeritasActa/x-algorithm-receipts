@@ -60,6 +60,28 @@ This demonstrates how reproducibility can be made **cryptographically checkable*
 
 Committed pair lives in [`examples/reproducibility-pair/`](examples/reproducibility-pair/). To regenerate (with fresh timestamps) the committed example pair, run `npm run repro-demo -- --update-committed`. By default, the script writes to a gitignored `.repro-tmp/` directory so re-runs don't dirty the committed examples.
 
+## Issuer-blind disclosure demo (v0.4.0)
+
+The v0.3 receipt proves execution binding. v0.4 adds the next layer: a local BRASS/VOPRF-gated disclosure demo showing how an authorized researcher can unlock a scoped opening without the issuer learning which receipt or policy was later used.
+
+```sh
+npm run voprf-demo
+npm run unlinkability-demo
+```
+
+`npm run voprf-demo` verifies the real receipt, issues a local BRASS-style VOPRF token for `dsa-researcher:top-10`, verifies issuer and client DLEQ proofs, then opens only the top 10 structured ranked items. Each disclosed row is checked against the signed `ranked_items_root` with a Merkle proof.
+
+Committed fixtures live in [`examples/voprf-gated-disclosure/`](examples/voprf-gated-disclosure/):
+
+| Fixture | Purpose |
+|---|---|
+| `researcher-top10.disclosure.json` | Top-10 structured disclosure bundle with per-row Merkle openings. |
+| `gated-disclosure.attestation.json` | Signed attestation over the disclosure hash, token nullifier hint, and receipt id. |
+| `gated-disclosure.jwks` | Public key for the disclosure attestation. |
+| `unlinkability-demo.json` | Issuer-view vs verifier-view transcript showing the privacy boundary. |
+
+Important: this is a **local demo** of the same BRASS/VOPRF token shape used by the ScopeBlind stack. It does not call the production issuer at `api.scopeblind.com`. The commercial layer is managed issuance, policy-tiered disclosure, retention, and audit-room UX. The open layer remains the receipt format and offline verifier.
+
 ## Real mode against an actual Phoenix pipeline (v0.3.0)
 
 The repo ships a real-mode receipt at [`examples/x-feed-real.receipt.json`](examples/x-feed-real.receipt.json) bound to a real ranking pass against `xai-org/x-algorithm@0bfc2795d308f90032544322747caacd535f75ae`. Verify it the same way as the mock receipt:

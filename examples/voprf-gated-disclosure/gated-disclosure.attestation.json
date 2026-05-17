@@ -1,0 +1,19 @@
+{
+  "v": 2,
+  "type": "recommender_gated_disclosure_attestation",
+  "algorithm": "ed25519",
+  "kid": "x-algorithm-demo-8a20dedc542c",
+  "issuer": "did:web:scopeblind.com:examples:x-algorithm-receipts",
+  "issued_at": "2026-05-17T03:49:36.300Z",
+  "payload": {
+    "profile": "scopeblind.recommender.gated-disclosure-attestation.v1",
+    "receipt_id": "sha256:8bb175deff4bf85c74ddd1773e3e55cb80ba7a46df173cad1a7857e671721f1d",
+    "receipt_signature_hash": "sha256:7da66789c1cebe3b9db650c1b3882d196411eb74b75ff663d7d2c3e2325c77e4",
+    "disclosure_hash": "sha256:cdf933b9ddf663a00eb74eed27b0bd2a1b898803bf38c81188b485642088b0ef",
+    "token_nullifier_hint": "RYFhlhm2E2992MT_RJ",
+    "policy": "dsa-researcher:top-10",
+    "disclosed_top_n": 10,
+    "caveat": "The token gates disclosure of a committed opening. It proves authorization and receipt binding, not ranking fairness or production deployment."
+  },
+  "signature": "cd6c7e1809ef31ae2534aa6fd007fd654c100554e3b5e82f3e92ce336f41d5c644b5f6e72a534c02e710304fb3bc5d6614aa12aa55c4246ccad255a0ee77420b"
+}

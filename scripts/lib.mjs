@@ -116,13 +116,13 @@ export function verifyReceiptLocally(receipt, publicJwk) {
 
 export function merkleRootHex(leaves) {
   if (!Array.isArray(leaves) || leaves.length === 0) return sha256Hex(Buffer.alloc(0));
-  let layer = leaves.map((leaf) => createHash('sha256').update(Buffer.concat([Buffer.from([0x00]), Buffer.from(leaf, 'utf8')])).digest());
+  let layer = leaves.map((leaf) => merkleLeafHash(leaf));
   while (layer.length > 1) {
     const next = [];
     for (let i = 0; i < layer.length; i += 2) {
       const left = layer[i];
       const right = layer[i + 1] || layer[i];
-      next.push(createHash('sha256').update(Buffer.concat([Buffer.from([0x01]), left, right])).digest());
+      next.push(merkleParentHash(left, right));
     }
     layer = next;
   }
@@ -132,6 +132,63 @@ export function merkleRootHex(leaves) {
 export function merkleRoot(values) {
   const leaves = values.map((value) => canonicalize(value));
   return `merkle-rfc6962-sha256:${merkleRootHex(leaves)}`;
+}
+
+export function merkleLeafHash(leaf) {
+  return createHash('sha256').update(Buffer.concat([Buffer.from([0x00]), Buffer.from(leaf, 'utf8')])).digest();
+}
+
+export function merkleParentHash(left, right) {
+  return createHash('sha256').update(Buffer.concat([Buffer.from([0x01]), left, right])).digest();
+}
+
+export function merkleProof(values, index) {
+  if (!Array.isArray(values) || values.length === 0) throw new Error('merkleProof: values must be non-empty');
+  if (!Number.isInteger(index) || index < 0 || index >= values.length) throw new Error('merkleProof: index out of range');
+
+  let cursor = index;
+  let layer = values.map((value) => merkleLeafHash(canonicalize(value)));
+  const proof = [];
+
+  while (layer.length > 1) {
+    const isRight = cursor % 2 === 1;
+    const siblingIndex = isRight ? cursor - 1 : cursor + 1;
+    const sibling = layer[siblingIndex] || layer[cursor];
+    proof.push({
+      side: isRight ? 'left' : 'right',
+      hash: sibling.toString('hex'),
+    });
+
+    const next = [];
+    for (let i = 0; i < layer.length; i += 2) {
+      next.push(merkleParentHash(layer[i], layer[i + 1] || layer[i]));
+    }
+    cursor = Math.floor(cursor / 2);
+    layer = next;
+  }
+
+  return {
+    index,
+    total: values.length,
+    leaf: canonicalize(values[index]),
+    proof,
+  };
+}
+
+export function verifyMerkleProof(value, opening, expectedRoot) {
+  if (!opening || !Array.isArray(opening.proof)) return false;
+  let hash = merkleLeafHash(canonicalize(value));
+  for (const step of opening.proof) {
+    const sibling = Buffer.from(step.hash, 'hex');
+    if (step.side === 'left') {
+      hash = merkleParentHash(sibling, hash);
+    } else if (step.side === 'right') {
+      hash = merkleParentHash(hash, sibling);
+    } else {
+      return false;
+    }
+  }
+  return `merkle-rfc6962-sha256:${hash.toString('hex')}` === expectedRoot;
 }
 
 export function listFilesRecursive(root, opts = {}) {

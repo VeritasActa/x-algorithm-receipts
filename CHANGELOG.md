@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.4.0 - 2026-05-17
+
+- Added a local BRASS/VOPRF-gated disclosure demo for the recommender receipt.
+- Added `scripts/voprf-gated-disclosure-demo.mjs`, which verifies a receipt, verifies a VOPRF token, and opens a scoped top-10 structured disclosure with Merkle proofs.
+- Added `scripts/unlinkability-demo.mjs`, which shows the issuer view and verifier view for two redemptions by the same approved researcher.
+- Added committed fixtures under `examples/voprf-gated-disclosure/`.
+- Added Noble P-256/SHA-256 dependencies for the local demo crypto.
+- Added Merkle proof helpers and tests.
+
 ## v0.3.0 - 2026-05-17
 
 - Added a Phoenix real-mode structured parser (`phoenix-table-v1`) for ranked table rows.

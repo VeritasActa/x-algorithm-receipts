@@ -74,6 +74,19 @@ The in-browser verifier at https://www.scopeblind.com/verify-receipt verifies re
 
 It does load static assets (HTML, JS bundles) from Cloudflare Pages CDN at page load, and the "Load example" button fetches the example receipt + JWKS from a public jsDelivr CDN mirror of this repo. No telemetry, no receipt content transmission.
 
+## VOPRF-gated disclosure demo
+
+The v0.4.0 VOPRF demos are local demos. They generate BRASS-style P-256 VOPRF tokens with issuer and client DLEQ proofs, verify those proofs locally, and use the verified token to gate disclosure of structured ranked rows.
+
+They do **not** call the production ScopeBlind issuer at `api.scopeblind.com`. They are intended to make the privacy boundary concrete:
+
+- The issuer sees a blinded request and evaluation.
+- The verifier sees a scope-specific nullifier.
+- The disclosed rows verify against the signed `ranked_items_root`.
+- The issuer does not learn the receipt id, disclosure policy, or verifier-side nullifier in the local BRASS-style flow.
+
+The precise guarantee is: the issuer cannot link token issuance to later verification/redemption from the cryptographic transcript alone. A full deployment still needs operational separation, access controls, retention policy, and key management. Linkability within one verifier scope can be intentional for rate limiting.
+
 ## Regulatory framing
 
 Receipts are an engineering primitive, not a regulatory artifact. Whether a deployment of receipt-emitting recommenders satisfies any specific regulatory framework (DSA Article 27, AI Act Article 12, etc.) depends on retention policy, access control, the auditor's authority, the regulator's view of the receipt's evidentiary weight, and other factors well outside the scope of the receipt format itself.
@@ -82,7 +95,7 @@ Nothing in this repo is legal advice. The format is published as an IETF Interne
 
 ## Versions
 
-- This document applies to the `v0.3.0` release shipped 17 May 2026.
+- This document applies to the `v0.4.0` release shipped 17 May 2026.
 - Material changes to what receipts prove will be flagged in future revisions of this document and noted in the changelog.
 
 ## Reporting

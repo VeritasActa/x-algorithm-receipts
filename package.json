@@ -1,6 +1,6 @@
 {
   "name": "x-algorithm-receipts",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Post-ranking signed receipt wrapper for the published xAI/X For You algorithm demo pipeline.",
   "type": "module",
@@ -11,7 +11,9 @@
     "verify": "npx @veritasacta/verify examples/x-feed-demo.receipt.json --jwks examples/demo.jwks",
     "test": "node --test test/*.test.mjs",
     "tamper-demo": "node scripts/tamper-demo.mjs",
-    "repro-demo": "node scripts/reproducibility-demo.mjs"
+    "repro-demo": "node scripts/reproducibility-demo.mjs",
+    "voprf-demo": "node scripts/voprf-gated-disclosure-demo.mjs",
+    "unlinkability-demo": "node scripts/unlinkability-demo.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -23,5 +25,9 @@
     "signed-receipts",
     "veritas-acta",
     "scopeblind"
-  ]
+  ],
+  "dependencies": {
+    "@noble/curves": "^1.9.7",
+    "@noble/hashes": "^1.8.0"
+  }
 }

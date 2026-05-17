@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import { generateKeyPairSync } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import { canonicalize, merkleRoot, publicJwksFromPrivateJwk, signReceipt, verifyReceiptLocally } from '../scripts/lib.mjs';
+import { canonicalize, merkleProof, merkleRoot, publicJwksFromPrivateJwk, signReceipt, verifyMerkleProof, verifyReceiptLocally } from '../scripts/lib.mjs';
 import { buildStdoutLineItems, parsePhoenixRankingOutput } from '../scripts/phoenix-parser.mjs';
+import { createDemoIssuer, issueDemoToken, verifyDemoVoprfToken } from '../scripts/voprf-demo-crypto.mjs';
 
 test('canonicalize sorts keys recursively', () => {
   assert.equal(canonicalize({ b: 2, a: { d: 4, c: 3 } }), '{"a":{"c":3,"d":4},"b":2}');
@@ -71,4 +72,49 @@ test('stdout line builder preserves a stable line-indexed byte disclosure view',
     { index: 0, line: 'A' },
     { index: 1, line: 'B' },
   ]);
+});
+
+test('Merkle proof verifies structured top-N records against ranked_items_root', () => {
+  const receipt = JSON.parse(readFileSync(new URL('../examples/x-feed-real.receipt.json', import.meta.url), 'utf8'));
+  const items = receipt.payload.ranked_items_top_n_optional.items;
+  const opening = merkleProof(items, 0);
+  assert.equal(verifyMerkleProof(items[0], opening, receipt.payload.ranked_items_root), true);
+  assert.equal(verifyMerkleProof({ ...items[0], score: 999 }, opening, receipt.payload.ranked_items_root), false);
+});
+
+test('VOPRF demo token verifies and gates a receipt-specific policy', async () => {
+  const issuer = createDemoIssuer({ kid: 'unit-test-issuer' });
+  const receiptId = 'sha256:unit-test-receipt';
+  const policy = 'dsa-researcher:top-10';
+  const { token } = issueDemoToken({ issuer, origin: 'https://researcher.example', policy, receiptId });
+  const ok = await verifyDemoVoprfToken(token, { expectedPolicy: policy, expectedReceiptId: receiptId, requireClientProof: true });
+  assert.equal(ok.valid, true);
+  assert.equal(ok.dleq.issuer, true);
+  assert.equal(ok.dleq.client, true);
+  assert.ok(ok.nullifier);
+
+  const wrong = await verifyDemoVoprfToken(token, { expectedPolicy: 'dsa-researcher:top-30', expectedReceiptId: receiptId, requireClientProof: true });
+  assert.equal(wrong.valid, false);
+  assert.equal(wrong.error, 'policy_mismatch');
+});
+
+test('VOPRF nullifiers differ across receipt scopes', async () => {
+  const issuer = createDemoIssuer({ kid: 'unit-test-issuer' });
+  const a = issueDemoToken({ issuer, origin: 'https://researcher.example', policy: 'dsa-researcher:top-10', receiptId: 'sha256:a' });
+  const b = issueDemoToken({ issuer, origin: 'https://researcher.example', policy: 'dsa-researcher:top-10', receiptId: 'sha256:b' });
+  const va = await verifyDemoVoprfToken(a.token, { requireClientProof: true });
+  const vb = await verifyDemoVoprfToken(b.token, { requireClientProof: true });
+  assert.equal(va.valid, true);
+  assert.equal(vb.valid, true);
+  assert.notEqual(va.nullifier, vb.nullifier);
+});
+
+test('committed gated disclosure fixture opens top-10 rows against real receipt root', () => {
+  const receipt = JSON.parse(readFileSync(new URL('../examples/x-feed-real.receipt.json', import.meta.url), 'utf8'));
+  const disclosure = JSON.parse(readFileSync(new URL('../examples/voprf-gated-disclosure/researcher-top10.disclosure.json', import.meta.url), 'utf8'));
+  assert.equal(disclosure.disclosed_items.length, 10);
+  assert.equal(disclosure.merkle_openings.length, 10);
+  disclosure.disclosed_items.forEach((item, index) => {
+    assert.equal(verifyMerkleProof(item, disclosure.merkle_openings[index], receipt.payload.ranked_items_root), true);
+  });
 });

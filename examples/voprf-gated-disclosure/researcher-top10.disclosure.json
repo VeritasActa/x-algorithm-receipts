@@ -1,0 +1,458 @@
+{
+  "profile": "scopeblind.recommender.voprf-gated-disclosure.v1",
+  "demo_mode": true,
+  "demo_note": "Local demo of BRASS/VOPRF-gated disclosure. Production issuance is the managed ScopeBlind API; this fixture does not call api.scopeblind.com.",
+  "receipt_ref": {
+    "receipt_id": "sha256:8bb175deff4bf85c74ddd1773e3e55cb80ba7a46df173cad1a7857e671721f1d",
+    "type": "recommender_rank_receipt",
+    "algorithm_commit": "git:0bfc2795d308f90032544322747caacd535f75ae",
+    "ranked_items_root": "merkle-rfc6962-sha256:4eff4e9ba7004994adccad71aa9ce4097798bb714dca4c3dd341c279155bc001",
+    "ranked_items_count": 30
+  },
+  "authorization": {
+    "token_format": "voprf-p256-sha256",
+    "policy": "dsa-researcher:top-10",
+    "token_kid": "scopeblind-demo-voprf-2026",
+    "nullifier_hint": "RYFhlhm2E2992MT_RJ",
+    "dleq": {
+      "issuer": true,
+      "client": true
+    }
+  },
+  "disclosure": {
+    "field": "ranked_items_top_n_optional.items",
+    "top_n": 10,
+    "hidden_count": 20,
+    "hidden_fields_remain_committed": true
+  },
+  "disclosed_items": [
+    {
+      "rank": 1,
+      "post_url": "https://x.com/a/status/2055371034010726771",
+      "post_id": "2055371034010726771",
+      "score": 0.3922,
+      "retrieval_score": 0.898,
+      "favorite_probability": 0.293,
+      "reply_probability": 0.0003,
+      "repost_probability": 0.0114,
+      "dwell_probability": 0.4785,
+      "vqv_score": 0.0781,
+      "topics": [
+        "Sports",
+        "NBA"
+      ]
+    },
+    {
+      "rank": 2,
+      "post_url": "https://x.com/a/status/2055373931960246693",
+      "post_id": "2055373931960246693",
+      "score": 0.3906,
+      "retrieval_score": 0.8892,
+      "favorite_probability": 0.293,
+      "reply_probability": 0.0002,
+      "repost_probability": 0.0022,
+      "dwell_probability": 0.4844,
+      "vqv_score": 0.1055,
+      "topics": [
+        "Sports"
+      ]
+    },
+    {
+      "rank": 3,
+      "post_url": "https://x.com/a/status/2055373509635797438",
+      "post_id": "2055373509635797438",
+      "score": 0.3836,
+      "retrieval_score": 0.8873,
+      "favorite_probability": 0.293,
+      "reply_probability": 0.0003,
+      "repost_probability": 0.0033,
+      "dwell_probability": 0.4473,
+      "vqv_score": 0.0498,
+      "topics": [
+        "Sports"
+      ]
+    },
+    {
+      "rank": 4,
+      "post_url": "https://x.com/a/status/2055335444297011304",
+      "post_id": "2055335444297011304",
+      "score": 0.3511,
+      "retrieval_score": 0.9382,
+      "favorite_probability": 0.2402,
+      "reply_probability": 0.0009,
+      "repost_probability": 0.0061,
+      "dwell_probability": 0.543,
+      "vqv_score": 0.1128,
+      "topics": [
+        "Sports",
+        "NBA"
+      ]
+    },
+    {
+      "rank": 5,
+      "post_url": "https://x.com/a/status/2055363262837821760",
+      "post_id": "2055363262837821760",
+      "score": 0.3284,
+      "retrieval_score": 0.9158,
+      "favorite_probability": 0.2314,
+      "reply_probability": 0.0002,
+      "repost_probability": 0.0025,
+      "dwell_probability": 0.4805,
+      "vqv_score": 0.125,
+      "topics": [
+        "Sports"
+      ]
+    },
+    {
+      "rank": 6,
+      "post_url": "https://x.com/a/status/2055361859520254016",
+      "post_id": "2055361859520254016",
+      "score": 0.3149,
+      "retrieval_score": 0.8931,
+      "favorite_probability": 0.2285,
+      "reply_probability": 0.0001,
+      "repost_probability": 0.0037,
+      "dwell_probability": 0.4258,
+      "vqv_score": 0.0913,
+      "topics": [
+        "Sports"
+      ]
+    },
+    {
+      "rank": 7,
+      "post_url": "https://x.com/a/status/2055324672833491097",
+      "post_id": "2055324672833491097",
+      "score": 0.2975,
+      "retrieval_score": 0.8865,
+      "favorite_probability": 0.1973,
+      "reply_probability": 0.0008,
+      "repost_probability": 0.0125,
+      "dwell_probability": 0.4805,
+      "vqv_score": 0.1177,
+      "topics": [
+        "Sports",
+        "Premier League"
+      ]
+    },
+    {
+      "rank": 8,
+      "post_url": "https://x.com/a/status/2055135488894546385",
+      "post_id": "2055135488894546385",
+      "score": 0.2844,
+      "retrieval_score": 0.8835,
+      "favorite_probability": 0.1924,
+      "reply_probability": 0.0003,
+      "repost_probability": 0.0056,
+      "dwell_probability": 0.4512,
+      "vqv_score": 0.1113,
+      "topics": [
+        "Sports",
+        "American Football"
+      ]
+    },
+    {
+      "rank": 9,
+      "post_url": "https://x.com/a/status/2055341198764642324",
+      "post_id": "2055341198764642324",
+      "score": 0.2825,
+      "retrieval_score": 0.8965,
+      "favorite_probability": 0.1914,
+      "reply_probability": 0.0004,
+      "repost_probability": 0.002,
+      "dwell_probability": 0.4512,
+      "vqv_score": 0.1177,
+      "topics": [
+        "Sports"
+      ]
+    },
+    {
+      "rank": 10,
+      "post_url": "https://x.com/a/status/2055381228870594706",
+      "post_id": "2055381228870594706",
+      "score": 0.2775,
+      "retrieval_score": 0.9105,
+      "favorite_probability": 0.1729,
+      "reply_probability": 0.0001,
+      "repost_probability": 0.0074,
+      "dwell_probability": 0.5117,
+      "vqv_score": 0.1318,
+      "topics": [
+        "Sports",
+        "NHL"
+      ]
+    }
+  ],
+  "merkle_openings": [
+    {
+      "index": 0,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.4785,\"favorite_probability\":0.293,\"post_id\":\"2055371034010726771\",\"post_url\":\"https://x.com/a/status/2055371034010726771\",\"rank\":1,\"reply_probability\":0.0003,\"repost_probability\":0.0114,\"retrieval_score\":0.898,\"score\":0.3922,\"topics\":[\"Sports\",\"NBA\"],\"vqv_score\":0.0781}",
+      "proof": [
+        {
+          "side": "right",
+          "hash": "a527cc7acac66d314c7ff560acdc15b768540951ecabc2755f0a912ae0cc4716"
+        },
+        {
+          "side": "right",
+          "hash": "e5c557907b32958c0c9d26a52174ff123f896802f2881bc338e7a66ccdf97090"
+        },
+        {
+          "side": "right",
+          "hash": "7f7142cc9e70016842a5b6c6e44022a47394864476c37ff51e01d2e57aa0140a"
+        },
+        {
+          "side": "right",
+          "hash": "c0752ac240917f5b2cd60a877bb0b42b64e24f84fd86b43ab39c10597bade269"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.4844,\"favorite_probability\":0.293,\"post_id\":\"2055373931960246693\",\"post_url\":\"https://x.com/a/status/2055373931960246693\",\"rank\":2,\"reply_probability\":0.0002,\"repost_probability\":0.0022,\"retrieval_score\":0.8892,\"score\":0.3906,\"topics\":[\"Sports\"],\"vqv_score\":0.1055}",
+      "proof": [
+        {
+          "side": "left",
+          "hash": "a7f35f3d161b5db41e03343de9f5818b13275d6e2c3d18a74d5255a8db1ce8ac"
+        },
+        {
+          "side": "right",
+          "hash": "e5c557907b32958c0c9d26a52174ff123f896802f2881bc338e7a66ccdf97090"
+        },
+        {
+          "side": "right",
+          "hash": "7f7142cc9e70016842a5b6c6e44022a47394864476c37ff51e01d2e57aa0140a"
+        },
+        {
+          "side": "right",
+          "hash": "c0752ac240917f5b2cd60a877bb0b42b64e24f84fd86b43ab39c10597bade269"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.4473,\"favorite_probability\":0.293,\"post_id\":\"2055373509635797438\",\"post_url\":\"https://x.com/a/status/2055373509635797438\",\"rank\":3,\"reply_probability\":0.0003,\"repost_probability\":0.0033,\"retrieval_score\":0.8873,\"score\":0.3836,\"topics\":[\"Sports\"],\"vqv_score\":0.0498}",
+      "proof": [
+        {
+          "side": "right",
+          "hash": "4fb681e197afee13d461b2f8f06680ad9018973126c620bffba69324355eac33"
+        },
+        {
+          "side": "left",
+          "hash": "d9b916c540b454febe421c0d4b7ed329f8a2d7ad1cf2660b78f067dece9c7913"
+        },
+        {
+          "side": "right",
+          "hash": "7f7142cc9e70016842a5b6c6e44022a47394864476c37ff51e01d2e57aa0140a"
+        },
+        {
+          "side": "right",
+          "hash": "c0752ac240917f5b2cd60a877bb0b42b64e24f84fd86b43ab39c10597bade269"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.543,\"favorite_probability\":0.2402,\"post_id\":\"2055335444297011304\",\"post_url\":\"https://x.com/a/status/2055335444297011304\",\"rank\":4,\"reply_probability\":0.0009,\"repost_probability\":0.0061,\"retrieval_score\":0.9382,\"score\":0.3511,\"topics\":[\"Sports\",\"NBA\"],\"vqv_score\":0.1128}",
+      "proof": [
+        {
+          "side": "left",
+          "hash": "f933b4864bb67ca7fd3b5bf8b69cf500d2e740579000913c90d3eccafcdaf142"
+        },
+        {
+          "side": "left",
+          "hash": "d9b916c540b454febe421c0d4b7ed329f8a2d7ad1cf2660b78f067dece9c7913"
+        },
+        {
+          "side": "right",
+          "hash": "7f7142cc9e70016842a5b6c6e44022a47394864476c37ff51e01d2e57aa0140a"
+        },
+        {
+          "side": "right",
+          "hash": "c0752ac240917f5b2cd60a877bb0b42b64e24f84fd86b43ab39c10597bade269"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.4805,\"favorite_probability\":0.2314,\"post_id\":\"2055363262837821760\",\"post_url\":\"https://x.com/a/status/2055363262837821760\",\"rank\":5,\"reply_probability\":0.0002,\"repost_probability\":0.0025,\"retrieval_score\":0.9158,\"score\":0.3284,\"topics\":[\"Sports\"],\"vqv_score\":0.125}",
+      "proof": [
+        {
+          "side": "right",
+          "hash": "85f617ee290835c95da61c16e11fa2f6c22fef804457f9bd858fd6655f7b2785"
+        },
+        {
+          "side": "right",
+          "hash": "5c105fc55b9ae6d52e59afe2364ec19534ad05a8d8a349f738c1e97110e9f067"
+        },
+        {
+          "side": "left",
+          "hash": "014c632fc3a42e7bd5ed670db707f4294fbdd10a649c18c8739bcac9fdb28665"
+        },
+        {
+          "side": "right",
+          "hash": "c0752ac240917f5b2cd60a877bb0b42b64e24f84fd86b43ab39c10597bade269"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.4258,\"favorite_probability\":0.2285,\"post_id\":\"2055361859520254016\",\"post_url\":\"https://x.com/a/status/2055361859520254016\",\"rank\":6,\"reply_probability\":0.0001,\"repost_probability\":0.0037,\"retrieval_score\":0.8931,\"score\":0.3149,\"topics\":[\"Sports\"],\"vqv_score\":0.0913}",
+      "proof": [
+        {
+          "side": "left",
+          "hash": "2033e6b2d95a098fc5daaff180746d30af261c0b42ee38cc8bf489ffb757ea09"
+        },
+        {
+          "side": "right",
+          "hash": "5c105fc55b9ae6d52e59afe2364ec19534ad05a8d8a349f738c1e97110e9f067"
+        },
+        {
+          "side": "left",
+          "hash": "014c632fc3a42e7bd5ed670db707f4294fbdd10a649c18c8739bcac9fdb28665"
+        },
+        {
+          "side": "right",
+          "hash": "c0752ac240917f5b2cd60a877bb0b42b64e24f84fd86b43ab39c10597bade269"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.4805,\"favorite_probability\":0.1973,\"post_id\":\"2055324672833491097\",\"post_url\":\"https://x.com/a/status/2055324672833491097\",\"rank\":7,\"reply_probability\":0.0008,\"repost_probability\":0.0125,\"retrieval_score\":0.8865,\"score\":0.2975,\"topics\":[\"Sports\",\"Premier League\"],\"vqv_score\":0.1177}",
+      "proof": [
+        {
+          "side": "right",
+          "hash": "f060899de5ccd6bbbb69d7fbb20d5d7e2fc984b5a313e8596eec4f23698eeb88"
+        },
+        {
+          "side": "left",
+          "hash": "2a8b36db31057e77a5296e391c1269a64e1331f215e5c6a2a4bb0ca0d68a1cd2"
+        },
+        {
+          "side": "left",
+          "hash": "014c632fc3a42e7bd5ed670db707f4294fbdd10a649c18c8739bcac9fdb28665"
+        },
+        {
+          "side": "right",
+          "hash": "c0752ac240917f5b2cd60a877bb0b42b64e24f84fd86b43ab39c10597bade269"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.4512,\"favorite_probability\":0.1924,\"post_id\":\"2055135488894546385\",\"post_url\":\"https://x.com/a/status/2055135488894546385\",\"rank\":8,\"reply_probability\":0.0003,\"repost_probability\":0.0056,\"retrieval_score\":0.8835,\"score\":0.2844,\"topics\":[\"Sports\",\"American Football\"],\"vqv_score\":0.1113}",
+      "proof": [
+        {
+          "side": "left",
+          "hash": "001588d3f57c63a35741a7d422d322c28834075a5c467ede589e4c549b9d3681"
+        },
+        {
+          "side": "left",
+          "hash": "2a8b36db31057e77a5296e391c1269a64e1331f215e5c6a2a4bb0ca0d68a1cd2"
+        },
+        {
+          "side": "left",
+          "hash": "014c632fc3a42e7bd5ed670db707f4294fbdd10a649c18c8739bcac9fdb28665"
+        },
+        {
+          "side": "right",
+          "hash": "c0752ac240917f5b2cd60a877bb0b42b64e24f84fd86b43ab39c10597bade269"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.4512,\"favorite_probability\":0.1914,\"post_id\":\"2055341198764642324\",\"post_url\":\"https://x.com/a/status/2055341198764642324\",\"rank\":9,\"reply_probability\":0.0004,\"repost_probability\":0.002,\"retrieval_score\":0.8965,\"score\":0.2825,\"topics\":[\"Sports\"],\"vqv_score\":0.1177}",
+      "proof": [
+        {
+          "side": "right",
+          "hash": "f7630bac8b76a7e60b378ebd4efca45be3191635ab41fb279757904726456a1c"
+        },
+        {
+          "side": "right",
+          "hash": "777ed19c537fc2bab1e411a5f0d4d596a2d71b298bab967d735662cb0904b3c5"
+        },
+        {
+          "side": "right",
+          "hash": "b0eb3003177abb2b4b9ac977a6cb2501e3a28c4b32629f2dcdab8026ad2f1a9c"
+        },
+        {
+          "side": "left",
+          "hash": "bdeeb0cf5d6dc5d53f1600bf3d215a8176b2d578fff22b2a54690307a0310173"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "total": 30,
+      "leaf": "{\"dwell_probability\":0.5117,\"favorite_probability\":0.1729,\"post_id\":\"2055381228870594706\",\"post_url\":\"https://x.com/a/status/2055381228870594706\",\"rank\":10,\"reply_probability\":0.0001,\"repost_probability\":0.0074,\"retrieval_score\":0.9105,\"score\":0.2775,\"topics\":[\"Sports\",\"NHL\"],\"vqv_score\":0.1318}",
+      "proof": [
+        {
+          "side": "left",
+          "hash": "19560d5fc3c33335957a06c8dcb1fb0f069cb56b580de15d54eca4a81df6082a"
+        },
+        {
+          "side": "right",
+          "hash": "777ed19c537fc2bab1e411a5f0d4d596a2d71b298bab967d735662cb0904b3c5"
+        },
+        {
+          "side": "right",
+          "hash": "b0eb3003177abb2b4b9ac977a6cb2501e3a28c4b32629f2dcdab8026ad2f1a9c"
+        },
+        {
+          "side": "left",
+          "hash": "bdeeb0cf5d6dc5d53f1600bf3d215a8176b2d578fff22b2a54690307a0310173"
+        },
+        {
+          "side": "right",
+          "hash": "c78b0664062d451252f3eb219e710814d65ed8301c2e88cbfb9abf75d23bfe7b"
+        }
+      ]
+    }
+  ],
+  "caveat": "The token gates disclosure of a committed opening. It proves authorization and receipt binding, not ranking fairness or production deployment."
+}
