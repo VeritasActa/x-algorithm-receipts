@@ -88,6 +88,7 @@ const checks = [
   ['config_hash', a, b],
   ['input_commitment', a, b],
   ['output_root', a, b],
+  ['ranked_items_root', a, b],
   ['model_artifacts_root', a, b],
 ];
 
@@ -143,6 +144,6 @@ console.log('  - Mock mode uses deterministic synthetic data. Real-mode reproduc
 console.log('    depends on the underlying model and pipeline being deterministic, which is');
 console.log('    a property of the upstream system, not the receipt.');
 console.log('  - Hardware-level non-determinism (e.g. fused multiply-add ordering on GPUs)');
-console.log('    can introduce small numerical drift that changes the output and therefore');
-console.log("    the output_root. A real deployment should pin its execution environment.");
+console.log('    can introduce small numerical drift that changes the output commitments.');
+console.log('    A real deployment should pin its execution environment.');
 process.exit(0);

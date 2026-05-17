@@ -4,7 +4,7 @@
   "algorithm": "ed25519",
   "kid": "x-algorithm-demo-8a20dedc542c",
   "issuer": "did:web:scopeblind.com:examples:x-algorithm-receipts",
-  "issued_at": "2026-05-16T11:48:07.963Z",
+  "issued_at": "2026-05-17T03:10:02.291Z",
   "payload": {
     "receipt_profile": "recommender.post_ranking.v1",
     "event_kind": "post_ranking_audit_event",
@@ -154,16 +154,134 @@
         }
       ]
     },
+    "structured_output_version": "synthetic-ranked-items-v1",
+    "ranked_items_count": 50,
+    "ranked_items_root": "merkle-rfc6962-sha256:909f48e943c1f6738c0736427fe62c301a6e12562390ae234482f0a99bb0c1fb",
+    "ranked_items_top_n_optional": {
+      "top_n": 10,
+      "items": [
+        {
+          "rank": 1,
+          "post_id": "demo_post_900000",
+          "score": 1.4492,
+          "probabilities": {
+            "favorite": 0.89,
+            "reply": 0.196,
+            "repost": 0.32,
+            "dwell": 0.75
+          }
+        },
+        {
+          "rank": 2,
+          "post_id": "demo_post_900001",
+          "score": 1.379335,
+          "probabilities": {
+            "favorite": 0.842985,
+            "reply": 0.186734,
+            "repost": 0.306225,
+            "dwell": 0.726723
+          }
+        },
+        {
+          "rank": 3,
+          "post_id": "demo_post_900002",
+          "score": 1.312997,
+          "probabilities": {
+            "favorite": 0.79851,
+            "reply": 0.177919,
+            "repost": 0.293061,
+            "dwell": 0.70421
+          }
+        },
+        {
+          "rank": 4,
+          "post_id": "demo_post_900003",
+          "score": 1.250011,
+          "probabilities": {
+            "favorite": 0.756439,
+            "reply": 0.169535,
+            "repost": 0.280483,
+            "dwell": 0.682435
+          }
+        },
+        {
+          "rank": 5,
+          "post_id": "demo_post_900004",
+          "score": 1.190201,
+          "probabilities": {
+            "favorite": 0.716642,
+            "reply": 0.161559,
+            "repost": 0.268463,
+            "dwell": 0.661373
+          }
+        },
+        {
+          "rank": 6,
+          "post_id": "demo_post_900005",
+          "score": 1.133407,
+          "probabilities": {
+            "favorite": 0.678995,
+            "reply": 0.153972,
+            "repost": 0.256978,
+            "dwell": 0.641002
+          }
+        },
+        {
+          "rank": 7,
+          "post_id": "demo_post_900006",
+          "score": 1.079473,
+          "probabilities": {
+            "favorite": 0.643382,
+            "reply": 0.146755,
+            "repost": 0.246003,
+            "dwell": 0.621299
+          }
+        },
+        {
+          "rank": 8,
+          "post_id": "demo_post_900007",
+          "score": 1.028255,
+          "probabilities": {
+            "favorite": 0.609694,
+            "reply": 0.139891,
+            "repost": 0.235516,
+            "dwell": 0.602242
+          }
+        },
+        {
+          "rank": 9,
+          "post_id": "demo_post_900008",
+          "score": 0.979612,
+          "probabilities": {
+            "favorite": 0.577827,
+            "reply": 0.133361,
+            "repost": 0.225495,
+            "dwell": 0.583809
+          }
+        },
+        {
+          "rank": 10,
+          "post_id": "demo_post_900009",
+          "score": 0.933414,
+          "probabilities": {
+            "favorite": 0.547682,
+            "reply": 0.127149,
+            "repost": 0.215919,
+            "dwell": 0.565981
+          }
+        }
+      ]
+    },
     "selected_count": 50,
     "top_k_retrieval": 200,
     "top_k_display": 50,
     "runtime_environment": {
-      "wrapper": "ScopeBlind/x-algorithm-receipts@0.1.0",
+      "wrapper": "VeritasActa/x-algorithm-receipts@0.3.0",
       "node": "v22.20.0",
       "platform": "darwin",
       "arch": "arm64"
     },
     "caveat": "Receipts prove that a specific output was bound to specific code, model artifacts, config, and input commitments. They do not prove the output is fair, truthful, or beneficial."
   },
-  "signature": "29ef72c3e960f72200c513e96e88bc7ca52a0613e3cdaaf5843dcf069b8a67b9b71ea86b0e934510d64913b2ae8eb9bb3b628135e909e8f3402e743ec8d0bd09"
+  "signature": "caf3a799c40a839b9b724c8b12f911801071d440f610c048ba7fb57b7e798562084b131d41497d3c37d9b425b321a8a3c5874a21545f00f26ae6eb01d896e705"
 }

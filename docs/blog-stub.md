@@ -26,8 +26,9 @@ The receipt commits to:
 - Phoenix pipeline entry point
 - model/config/corpus hashes
 - private input Merkle root
-- full ranked output Merkle root
-- selectively disclosed top-N output
+- exact stdout-line Merkle root
+- structured ranked-item Merkle root
+- selectively disclosed top-N output, either as raw lines or parsed records
 - Ed25519 signature
 
 ## The boundary

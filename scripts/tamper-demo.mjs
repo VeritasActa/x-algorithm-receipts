@@ -28,13 +28,12 @@ console.log('');
 
 // 1. Verify the unmodified receipt first.
 console.log('STEP 1  Verify the original receipt');
-console.log('       $ npx @veritasacta/verify examples/x-feed-demo.receipt.json --jwks examples/demo.jwks');
+console.log(`       $ ${verifierDisplay()} examples/x-feed-demo.receipt.json --jwks examples/demo.jwks`);
 console.log('');
-const baseline = spawnSync('npx', ['-y', '@veritasacta/verify@0.6.1', SOURCE, '--jwks', JWKS], {
-  encoding: 'utf8',
-});
+const baseline = runVerifier(SOURCE, JWKS);
 process.stdout.write(baseline.stdout);
 if (baseline.status !== 0) {
+  process.stderr.write(baseline.stderr || '');
   console.error('Original receipt failed to verify. Aborting tamper demo.');
   process.exit(1);
 }
@@ -55,12 +54,10 @@ console.log('');
 
 // 3. Verify the tampered receipt. Expect failure.
 console.log('STEP 3  Re-run verification on the tampered receipt');
-console.log('       $ npx @veritasacta/verify .tamper-tmp/tampered.receipt.json --jwks examples/demo.jwks');
+console.log(`       $ ${verifierDisplay()} .tamper-tmp/tampered.receipt.json --jwks examples/demo.jwks`);
 console.log('');
 
-const after = spawnSync('npx', ['-y', '@veritasacta/verify@0.6.1', TAMPERED, '--jwks', JWKS], {
-  encoding: 'utf8',
-});
+const after = runVerifier(TAMPERED, JWKS);
 process.stdout.write(after.stdout);
 process.stderr.write(after.stderr);
 
@@ -79,3 +76,21 @@ console.log("output, timestamps) invalidates the signature. There is no way to")
 console.log('selectively edit the payload without re-signing it, and re-signing');
 console.log('requires the private key held by the original issuer.');
 process.exit(0);
+
+function verifierParts() {
+  const override = process.env.VERITAS_ACTA_VERIFY;
+  if (override) return override.split(/\s+/).filter(Boolean);
+  return ['npx', '-y', '@veritasacta/verify@0.6.1'];
+}
+
+function verifierDisplay() {
+  const override = process.env.VERITAS_ACTA_VERIFY;
+  return override || 'npx @veritasacta/verify';
+}
+
+function runVerifier(receiptPath, jwksPath) {
+  const [cmd, ...baseArgs] = verifierParts();
+  return spawnSync(cmd, [...baseArgs, receiptPath, '--jwks', jwksPath], {
+    encoding: 'utf8',
+  });
+}

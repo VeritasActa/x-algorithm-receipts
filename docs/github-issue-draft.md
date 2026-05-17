@@ -16,6 +16,8 @@ on_rank_complete(RankAuditEvent {
     input_commitment,
     output_root,
     output_top_n_optional,
+    ranked_items_root,
+    ranked_items_top_n_optional,
     timestamp,
 })
 ```

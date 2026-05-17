@@ -4,13 +4,865 @@
   "algorithm": "ed25519",
   "kid": "x-algorithm-demo-8a20dedc542c",
   "issuer": "did:web:scopeblind.com:examples:x-algorithm-receipts",
-  "issued_at": "2026-05-16T12:17:54.160Z",
+  "issued_at": "2026-05-17T03:14:11.115Z",
   "payload": {
     "receipt_profile": "recommender.post_ranking.v1",
     "event_kind": "post_ranking_audit_event",
     "algorithm_repo": "https://github.com/xai-org/x-algorithm",
-    "algorithm_commit": "git:c3ef3307baea78655d0db2672cf2aa51a0381454",
+    "algorithm_commit": "git:0bfc2795d308f90032544322747caacd535f75ae",
     "algorithm_worktree_dirty": false,
+    "algorithm_source_note": "algorithm source was a standalone git checkout.",
+    "algorithm_source_files": [
+      {
+        "path": "CODE_OF_CONDUCT.md",
+        "sha256": "sha256:d5ba112a67de435d35ff876d45e68fd67aa33f285e74b4623f2a380374167bba"
+      },
+      {
+        "path": "README.md",
+        "sha256": "sha256:b0330b02722df8c3a4f13b007f6212938a1f6d249b5150dd1a7e55c80728cfb9"
+      },
+      {
+        "path": "candidate-pipeline/candidate_pipeline.rs",
+        "sha256": "sha256:d3c6864377b6f1fbd3988e9f59c8db45dcf3321c67129843945d6ef2d6548503"
+      },
+      {
+        "path": "candidate-pipeline/filter.rs",
+        "sha256": "sha256:74117eb1fd5c38adc85e75b455305495968ded76a6c88aee4d8d6068c4a49fe1"
+      },
+      {
+        "path": "candidate-pipeline/hydrator.rs",
+        "sha256": "sha256:c8bdbbc4916461844fe42d6438e6afa5178f8a6368864e7c49e4e512734cbca2"
+      },
+      {
+        "path": "candidate-pipeline/lib.rs",
+        "sha256": "sha256:ab745cfff78adff2cc4cb8b283107544293792d660bb966cdc454b459c255a7c"
+      },
+      {
+        "path": "candidate-pipeline/query_hydrator.rs",
+        "sha256": "sha256:81fa923fc6afe26d12cdb9ed69dd9a5784dfd6152953cfaade89732047fa5165"
+      },
+      {
+        "path": "candidate-pipeline/scorer.rs",
+        "sha256": "sha256:9b3bdb6dd70cf94cefbaa72b3af4ad389f7f740865adf6fd95596d71387b3a15"
+      },
+      {
+        "path": "candidate-pipeline/selector.rs",
+        "sha256": "sha256:12aaa1000db83b01c4f9eaddb7d18aa6b6650766d14a722eec588e46196c0203"
+      },
+      {
+        "path": "candidate-pipeline/side_effect.rs",
+        "sha256": "sha256:e6386d4d271169b7415b00a23f806847ff0e4a591a2d95d711735eed928a8a78"
+      },
+      {
+        "path": "candidate-pipeline/source.rs",
+        "sha256": "sha256:dbfdd39f4221af721d571baefb2639b8c21efc699677da5c8a3579d05304d563"
+      },
+      {
+        "path": "candidate-pipeline/util.rs",
+        "sha256": "sha256:8f61c5ea4f3807b8b70e74a022fb36c4037989a9959ddd498ddf32d50a49435f"
+      },
+      {
+        "path": "grox/__init__.py",
+        "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "grox/classifiers/content/banger_initial_screen.py",
+        "sha256": "sha256:37b75509290b71c33390f784bb128e4b8e590730b49b3a65dd91a51356cc65fd"
+      },
+      {
+        "path": "grox/classifiers/content/classifier.py",
+        "sha256": "sha256:b86993c958c218ec6a34c2961e72c4f53c838ea0094271df4aedf13f03acbd88"
+      },
+      {
+        "path": "grox/classifiers/content/post_safety_screen_deluxe.py",
+        "sha256": "sha256:c1e3f0099c186a81db87ddc9386365c9934a37499512a2b18e2196d3b560d397"
+      },
+      {
+        "path": "grox/classifiers/content/reply_ranking.py",
+        "sha256": "sha256:fbf53a28adf0e764bc5dad2ab02ff7380c76f3654c0985aae06f4ceef7bc51d7"
+      },
+      {
+        "path": "grox/classifiers/content/safety_ptos.py",
+        "sha256": "sha256:2a2ae5efb4a55920be9cc74d72ca9150526fc9defbcac0b8ccda2e3931683324"
+      },
+      {
+        "path": "grox/classifiers/content/spam.py",
+        "sha256": "sha256:52788da150a8d7f6fd767b5b43144443fdcd31136b46d8dacae129c96be4c1f3"
+      },
+      {
+        "path": "grox/data_loaders/asr_processor.py",
+        "sha256": "sha256:f2b57840652bb6ccf0efd764177f09b2c7305f21d46796ed1149c287e5e311c3"
+      },
+      {
+        "path": "grox/data_loaders/kafka_loader.py",
+        "sha256": "sha256:1f423c67a87fff836a4bc0ab44842cddd96d4ced4b1a3f25b5bfd9f89c6c4e9b"
+      },
+      {
+        "path": "grox/data_loaders/message_queue_loader.py",
+        "sha256": "sha256:37941a8b92030a6aef66d926f5fdb49ca213a14c523ebca578c43c16ab175c82"
+      },
+      {
+        "path": "grox/data_loaders/strato_loader.py",
+        "sha256": "sha256:61c344e8d95d4e4d6bdac92b0c6bab80e2ffc758b3ba8e4b91ab59e5afd8f338"
+      },
+      {
+        "path": "grox/dispatcher.py",
+        "sha256": "sha256:13e0a8de1b37ba4412e45a71f3dbf66268470ad881e01bc32e1ad4d0ea6728e8"
+      },
+      {
+        "path": "grox/embedder/multimodal_post_embedder_v2.py",
+        "sha256": "sha256:04d7709517c4830e2129d37acd12c2ccf52591bbe5b67d65422d05a6d00a7aa8"
+      },
+      {
+        "path": "grox/embedder/multimodal_post_embedder_v5.py",
+        "sha256": "sha256:b71fa774e1d3a04dd16a5ff4c1ccd5bb7645e753bf11b1c13b30cac7fc160c6b"
+      },
+      {
+        "path": "grox/engine.py",
+        "sha256": "sha256:7a91cb0b12cfd8bed3db46155eab2d22cd8d8f600ad13ea2238e883d15b65c66"
+      },
+      {
+        "path": "grox/generators/stream_generator.py",
+        "sha256": "sha256:7960dd4362372827dc5607f94bb39f96ed1dfac57c8590e2ef0c8a48aa25b454"
+      },
+      {
+        "path": "grox/generators/task_generator.py",
+        "sha256": "sha256:78b889c77f5b40dd2d3b57ed4f8a41f0559e5316f5140af34273da6816f3dba1"
+      },
+      {
+        "path": "grox/lib/stream.py",
+        "sha256": "sha256:434e23742bc935584267c881f6ce0098591de9c52c0ffd43e8f693e7c69e2115"
+      },
+      {
+        "path": "grox/lib/utils.py",
+        "sha256": "sha256:a43dffa6bd687323df6a1e6dd54fceb9423fe56db088dc413f988594d7f2c371"
+      },
+      {
+        "path": "grox/main.py",
+        "sha256": "sha256:c1917983f832553f94c4581c50d3658ec661ab2a069d6920d1aae72fb9b36452"
+      },
+      {
+        "path": "grox/plans/plan.py",
+        "sha256": "sha256:a547b7754052401830b8d1b0d28524456856b327cef5e606cae56005ed17ce67"
+      },
+      {
+        "path": "grox/plans/plan_initial_banger.py",
+        "sha256": "sha256:3982e1f76597cb10cb26ef178907e96d5fd616aa5729e2c3ae2ed4702ae13751"
+      },
+      {
+        "path": "grox/plans/plan_master.py",
+        "sha256": "sha256:c22da0c54cb8e4037ec9a2f4254204c5800f51e90a3169815572616e573c50f5"
+      },
+      {
+        "path": "grox/plans/plan_post_embedding_v5.py",
+        "sha256": "sha256:6f6d3042f955ca0ab0477d8ed932cfdd59088f85758186efa3ffee8ccd72a50d"
+      },
+      {
+        "path": "grox/plans/plan_post_embedding_v5_for_reply.py",
+        "sha256": "sha256:d02e2a374ce8b8888d716a477f687ed70c87c6fa7573b69892d8518608b27d42"
+      },
+      {
+        "path": "grox/plans/plan_post_embedding_with_summary.py",
+        "sha256": "sha256:4676d3d4a49316408e5bbacb201906dfed27471f4a2a0392de83ebf6c7514c91"
+      },
+      {
+        "path": "grox/plans/plan_post_embedding_with_summary_for_reply.py",
+        "sha256": "sha256:180956f8084bed949d64f18a0b0068e4f21b1c91a4a699dc109f39203f1c340e"
+      },
+      {
+        "path": "grox/plans/plan_post_safety.py",
+        "sha256": "sha256:e03be1dc8c7d9f18f283f80210b25b94e44db9bef87ad2df7fbc5015831d5571"
+      },
+      {
+        "path": "grox/plans/plan_reply_ranking.py",
+        "sha256": "sha256:2afd63af5751cfb8575c25b51977790a428e085d2e2e219a4a75b3815fdc6d08"
+      },
+      {
+        "path": "grox/plans/plan_safety_ptos.py",
+        "sha256": "sha256:a066f64391087aac56c44d2d8abae5e57624f45f12b47a297ba0be268fcfe935"
+      },
+      {
+        "path": "grox/plans/plan_spam_comment.py",
+        "sha256": "sha256:6a487947e6d307285d50ba92f0f474adc86f2188df2457dde228baba2af8830c"
+      },
+      {
+        "path": "grox/schedules/context.py",
+        "sha256": "sha256:bb56a72436e5046c2ccafd8f3bf3185fe7ead6c4bf2a4bbbfc1ed9f57c588b1c"
+      },
+      {
+        "path": "grox/schedules/init.py",
+        "sha256": "sha256:e1641308d7c2bf57ac7f6c41b2cb01f65f385b4451ec95a75b070629bb088546"
+      },
+      {
+        "path": "grox/schedules/types.py",
+        "sha256": "sha256:89b7c59cf8cf993286c3d589700628c17f290dc4a6ce58f45b20bda74941f371"
+      },
+      {
+        "path": "grox/summarizer/eapi_summarizer.py",
+        "sha256": "sha256:53e76de4303c2185ac97d4e9a107f761face6feb5a003d867c8cc77aa4f850f4"
+      },
+      {
+        "path": "grox/summarizer/post_embedding_summarizer.py",
+        "sha256": "sha256:a5fbbf04b9bcbc303937aaa0f6e8076f451c406b52411b9cfd2913a917d6df97"
+      },
+      {
+        "path": "grox/summarizer/summarizer.py",
+        "sha256": "sha256:0bcb89773ebb3e340944cbb5b5e7d06845e9fcf98142431d6985a4d8641cfc19"
+      },
+      {
+        "path": "grox/tasks/disable_rules.py",
+        "sha256": "sha256:2671d2fa9cf8c01494ba9bf204fdffedd6c09d21d7355cd9445dd63867947e36"
+      },
+      {
+        "path": "grox/tasks/task.py",
+        "sha256": "sha256:00c113c6bf70f0c21f0d619835c53db4f6e7f5b3d6e4204ff8fa839715c79fa7"
+      },
+      {
+        "path": "grox/tasks/task_asr.py",
+        "sha256": "sha256:99651d3b5728efe94c21361f2a605441b6dff89eb26babacd125ed2aacde339b"
+      },
+      {
+        "path": "grox/tasks/task_banger_screen.py",
+        "sha256": "sha256:e58d5dda34c61cd2808cf914b7baf1d6275669021eb1712fb2ee053a72d71ec0"
+      },
+      {
+        "path": "grox/tasks/task_embedding_pub.py",
+        "sha256": "sha256:9beec23c45d5205dbdd2610d56326ea8d143bf92bec5df67e06a64a39fdaf6fb"
+      },
+      {
+        "path": "grox/tasks/task_filters.py",
+        "sha256": "sha256:38bdfa13e8f23d28a379b160866d814a4171cf78157a3f708b130093431bdc5b"
+      },
+      {
+        "path": "grox/tasks/task_grok_upa_action_with_labels.py",
+        "sha256": "sha256:3ed2db9ccaaa009f6437075e567d1ac1e7890e70d74c1c0c59a5dca070507936"
+      },
+      {
+        "path": "grox/tasks/task_load_post_with_not_found_retry.py",
+        "sha256": "sha256:6b0fce369705931408aaee0ce8206bbf3cd33f28bb9b2c494bb2892ec3ab86f6"
+      },
+      {
+        "path": "grox/tasks/task_load_post_with_summary.py",
+        "sha256": "sha256:fa297b7774f789da0f1b8c0a47fe09505e171947d9172fd9626874d0b5d89a0e"
+      },
+      {
+        "path": "grox/tasks/task_load_user_recent_posts.py",
+        "sha256": "sha256:b34240c3a71df5e0338ec3e441ee3ed8a60f93b621f7b5fcde10826ef1eacfee"
+      },
+      {
+        "path": "grox/tasks/task_media.py",
+        "sha256": "sha256:740002811c13a9c4956b42bb210ae841fe911b293ce0cf3b581b954b94177248"
+      },
+      {
+        "path": "grox/tasks/task_multimodal_post_embedding.py",
+        "sha256": "sha256:bd571df55bd39144b9cc7e873f3e494ef33a57e6a24df64cb446f34850d22ee4"
+      },
+      {
+        "path": "grox/tasks/task_post_safety_screen_deluxe.py",
+        "sha256": "sha256:a7a4e881415a910314f7585778a338f110399bfa49b1717ce673af7572eef58e"
+      },
+      {
+        "path": "grox/tasks/task_pub.py",
+        "sha256": "sha256:918c5ee44ae1ae88eded331f986253ade38f05c7346848db95ecde7eddde9157"
+      },
+      {
+        "path": "grox/tasks/task_rank_replies.py",
+        "sha256": "sha256:1fccada2d1b45d6a5e5e983130d7baac08bc4977092fe1e0b2b4cbbceb519a94"
+      },
+      {
+        "path": "grox/tasks/task_rate_limit.py",
+        "sha256": "sha256:b6cd30199521714092ef4d29100f6a978e757c5a90d02ea62e7faeb6770fe091"
+      },
+      {
+        "path": "grox/tasks/task_safety_ptos_category.py",
+        "sha256": "sha256:967d865508ef01fcf0b37e6e90af4bd4e2a64ff11df8aefbb6fdfbd79d8bb6d1"
+      },
+      {
+        "path": "grox/tasks/task_safety_ptos_policy.py",
+        "sha256": "sha256:8dfe8d0c78e80d81571f81df57e9d1baab1614a89e20bba242f72a6d3f82372f"
+      },
+      {
+        "path": "grox/tasks/task_spam_detection.py",
+        "sha256": "sha256:60af31618ba708cf87567314d38052721b4fe249df9660806bcd8c48b2a290bc"
+      },
+      {
+        "path": "grox/tasks/task_summarizer_for_post_embedding.py",
+        "sha256": "sha256:11127e0036af16a2a39e4d4ae39faad682e042e43613cc24fccb21e2c68ba754"
+      },
+      {
+        "path": "grox/tasks/task_write_mm_embedding_sink.py",
+        "sha256": "sha256:5b239b10a827fb79faa65ae1c11e85e27e12bc81ef27f78d94fc27b6fd2dcd06"
+      },
+      {
+        "path": "grox/tasks/task_write_safety_post_annotations_result_sink.py",
+        "sha256": "sha256:8f8c24bc48e0af5a7258d80323dfafefbfe19d4d57c4d4b8f79d528affab0f54"
+      },
+      {
+        "path": "home-mixer/ads/mod.rs",
+        "sha256": "sha256:da046bcfa5e5eafda6e3aadca1a98725fdad3983bebba8812ebbf6ae8b3ac569"
+      },
+      {
+        "path": "home-mixer/ads/partition_organic_blender.rs",
+        "sha256": "sha256:b497683125565e343ed5b79d28c5c6b4c08bd0c533e79e4e13196e0705316068"
+      },
+      {
+        "path": "home-mixer/ads/safe_gap_blender.rs",
+        "sha256": "sha256:3b1d99848de7958d47899e25d91ce2d375c8cbf8341bb6f87a37a977a9c75cbb"
+      },
+      {
+        "path": "home-mixer/ads/util.rs",
+        "sha256": "sha256:e70917c8720eec2111751beecf281a66e82ec68951c877016a643dfc49f87203"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/ads_brand_safety_hydrator.rs",
+        "sha256": "sha256:3f498a8b1ad30d1f38ec5b4e5476d2aae98c7864b84a8c03a8422b28698309a1"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/ads_brand_safety_vf_hydrator.rs",
+        "sha256": "sha256:1f8a0360cb93f433bcdd960d147aa9382e938a34ba3cefeba9694513056fe6de"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/blocked_by_hydrator.rs",
+        "sha256": "sha256:37d6868b084700eead7074684d762b499d0ee54df07343087de8e86638abcc39"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/core_data_candidate_hydrator.rs",
+        "sha256": "sha256:07c42d1c6db82a6a1716d791c40280d27180b2bb3bf690d6a6233c999ab7a6d4"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/engagement_counts_hydrator.rs",
+        "sha256": "sha256:39e544a8c1e46d388aa98a8426ebbf20dc70a6368c201e203cbc9690a6e3eaab"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/filtered_topics_hydrator.rs",
+        "sha256": "sha256:8faa4fec5fa45ae9d4108d41b8377b02d60aa4bb00dd7c7d26918eaef4321e01"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/following_replied_users_hydrator.rs",
+        "sha256": "sha256:84c759f5fb69cc95cdbc2b4249f2653a7a9d6ae15ca8f5301c097eba5f9fdc93"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/gizmoduck_hydrator.rs",
+        "sha256": "sha256:b9e08f3b642bc094d17b03cdd8744bac1e25fd9ab3be5291215f857dbde1a8d8"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/has_media_hydrator.rs",
+        "sha256": "sha256:1c0ca453a505c8af8546a4476138053868b9d6fb24384e69f6b8a4a3b248a78c"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/in_network_candidate_hydrator.rs",
+        "sha256": "sha256:3c66f05cfa3c830dc6b924eb8b5229890bc6e03b590f030c53390834d92bec62"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/language_code_hydrator.rs",
+        "sha256": "sha256:787843a911c40cee3d599df7303913dfb7d80011c801f9e2d01bcfd750a3c9e4"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/mod.rs",
+        "sha256": "sha256:cb9f3ca4e112bc6c9063922dd982ea9e03ad28b032a8794435749db69f31c7f2"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/mutual_follow_jaccard_hydrator.rs",
+        "sha256": "sha256:946e391732d7fca39df0b55707f4d86c5b2e515507c0a533d4a778be52c283a7"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/quote_hydrator.rs",
+        "sha256": "sha256:c9d243723ce23e9a3919f3ad92a80e57e65e595f9f8138ab5fcd47fbd1fb0cb5"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/subscription_hydrator.rs",
+        "sha256": "sha256:0a9194d029c728192dd340f2603b513bc09d18dfe5d141aa78baca820b98e0ce"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/tweet_type_metrics_hydrator.rs",
+        "sha256": "sha256:7dc501cb0477b7c42058ad8c0354641f73fb2e527c39970f17f1a344c776722d"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/vf_candidate_hydrator.rs",
+        "sha256": "sha256:fe69883b48bae1fefa94aea1e79061295bf1806caf005e024efd947a1696d7ba"
+      },
+      {
+        "path": "home-mixer/candidate_hydrators/video_duration_candidate_hydrator.rs",
+        "sha256": "sha256:ecb950b8f7bc2e2a93ed6bc68eabfb2de142aca718d5e0b9a6ec18c10ca46cc3"
+      },
+      {
+        "path": "home-mixer/candidate_pipeline/candidate.rs",
+        "sha256": "sha256:cb9ff6338cb59d257b747a94265a5477d9db12bfe8788d3a2a2862686992c935"
+      },
+      {
+        "path": "home-mixer/candidate_pipeline/candidate_features.rs",
+        "sha256": "sha256:703d7528695c06ed7bc35eed54b794d4440aad77ae5d36d0c589c40c3c6b0fd0"
+      },
+      {
+        "path": "home-mixer/candidate_pipeline/for_you_candidate_pipeline.rs",
+        "sha256": "sha256:0823802bf25966c00be4f95ed92a7bbca623f1b4566f72d13d1d150f2e5d6bd3"
+      },
+      {
+        "path": "home-mixer/candidate_pipeline/mod.rs",
+        "sha256": "sha256:a977866fa092a2738905a09aee29346161998712ed73613ddc3a539dfa51558d"
+      },
+      {
+        "path": "home-mixer/candidate_pipeline/phoenix_candidate_pipeline.rs",
+        "sha256": "sha256:9cd21931644a66144f3d1acd87ad61bfa17ae794cf10c24384fab9943e48564f"
+      },
+      {
+        "path": "home-mixer/candidate_pipeline/query.rs",
+        "sha256": "sha256:33213f945fe9d21235edeb5fd5a4b3a9b3c27287c372f8eeefd59f310c911030"
+      },
+      {
+        "path": "home-mixer/candidate_pipeline/query_features.rs",
+        "sha256": "sha256:84dffad173ac385428b1cbfb3fdd077af9060151f67f767596e4414ec75a9534"
+      },
+      {
+        "path": "home-mixer/filters/age_filter.rs",
+        "sha256": "sha256:145ff1de33e2d86022e2815b856d29400a449b3059774a608836f5f26282e2df"
+      },
+      {
+        "path": "home-mixer/filters/ancillary_vf_filter.rs",
+        "sha256": "sha256:cdb8b10b49ae78708fb35a00662e3fea45db9c801db06c5a9595b4d7f0a4968c"
+      },
+      {
+        "path": "home-mixer/filters/author_socialgraph_filter.rs",
+        "sha256": "sha256:b9d82eab07020b60647fdb79c70e4dcfd73f76a6a3195e3ae58b6a855e056ec2"
+      },
+      {
+        "path": "home-mixer/filters/core_data_hydration_filter.rs",
+        "sha256": "sha256:b4300e603951ea2fc5213bf3d7f9306c01531e02a79a18109bdb8bc8d987dd4b"
+      },
+      {
+        "path": "home-mixer/filters/dedup_conversation_filter.rs",
+        "sha256": "sha256:fc93a1cd18c4692e6625821a88492ae08cc9a222c41451feb9e745bf86145140"
+      },
+      {
+        "path": "home-mixer/filters/drop_duplicates_filter.rs",
+        "sha256": "sha256:49944f7ad7214bd47c9a64db8f7ca864220f5703d7d2e8c383504c7d39a6ab7b"
+      },
+      {
+        "path": "home-mixer/filters/ineligible_subscription_filter.rs",
+        "sha256": "sha256:83e8bb7eb640ba3bc299763498d94df72130888922045e74c813fd2c2b4b0b1f"
+      },
+      {
+        "path": "home-mixer/filters/mod.rs",
+        "sha256": "sha256:c4449062638a241a883cea86c0b94f5715d2198096ef6a088630a3220ee73133"
+      },
+      {
+        "path": "home-mixer/filters/muted_keyword_filter.rs",
+        "sha256": "sha256:9ddbdbb7b1553019510bc61142daa7e147676b516e025c2612694b4a5c848b97"
+      },
+      {
+        "path": "home-mixer/filters/new_user_topic_ids_filter.rs",
+        "sha256": "sha256:83278ff36ecb657eb8811989090d6086041b4715fad4bf29b37cc2c790a70c38"
+      },
+      {
+        "path": "home-mixer/filters/previously_seen_posts_backup_filter.rs",
+        "sha256": "sha256:aeb38218a1a51f0cec03f454bb4bb796cf0be5a2dd4bd252b1111c8f23a302f9"
+      },
+      {
+        "path": "home-mixer/filters/previously_seen_posts_filter.rs",
+        "sha256": "sha256:9f5abd0eb9ff1a30dc3f0aaa7ccaf776b54672782222931e2cb7567869734d6d"
+      },
+      {
+        "path": "home-mixer/filters/previously_served_posts_filter.rs",
+        "sha256": "sha256:fdc08526bb073a18f2b67164d76f0ea4cf0c2d48cae02f5cc2567be260530c71"
+      },
+      {
+        "path": "home-mixer/filters/retweet_deduplication_filter.rs",
+        "sha256": "sha256:5eb1528ebb5873ff29bdf07576702957f0d354bcf61a5067cf406462162dcb07"
+      },
+      {
+        "path": "home-mixer/filters/self_tweet_filter.rs",
+        "sha256": "sha256:1c474f5836cf4341edcecb9854d250755b7c30410459ff55115feac2afbaa039"
+      },
+      {
+        "path": "home-mixer/filters/topic_ids_filter.rs",
+        "sha256": "sha256:97f72f59496f27d4c7a5d9185bf13018e0605124a006513bb58d2796d2e75537"
+      },
+      {
+        "path": "home-mixer/filters/vf_filter.rs",
+        "sha256": "sha256:3fc6fa03e1263e8b51dc983ea1a78a20f7f0ed4c7241322efc1588670e602bd3"
+      },
+      {
+        "path": "home-mixer/filters/video_filter.rs",
+        "sha256": "sha256:fe5b66c9942398bff7291e023bc48253c3396522d5f9d1641b9e882c6ced7e11"
+      },
+      {
+        "path": "home-mixer/for_you_server.rs",
+        "sha256": "sha256:e83ebebe00303b86f73bd011dfd63c31a9a75e69a163cc514630137b3c0ae1df"
+      },
+      {
+        "path": "home-mixer/lib.rs",
+        "sha256": "sha256:c7a8d5f52c565c2a3ff4c07080a5f63ed6040b4a269601c6bd44d1fd11e836cb"
+      },
+      {
+        "path": "home-mixer/main.rs",
+        "sha256": "sha256:d82513a2f28838e952b1408a0fdeb33dee38adabca74620b623a0f6d74d10413"
+      },
+      {
+        "path": "home-mixer/models/brand_safety.rs",
+        "sha256": "sha256:e58005eb0e7b8c798fb166aa3f8d628fa87ee8a3e0e1cf7086d2d43e789678ce"
+      },
+      {
+        "path": "home-mixer/models/candidate.rs",
+        "sha256": "sha256:26e9b7b8b48fce2d5d428320a38233298ebf8cdd7e48e36bde4889c38288e8f8"
+      },
+      {
+        "path": "home-mixer/models/candidate_features.rs",
+        "sha256": "sha256:0539826690d0395d081eb4e96338c76c518aa657265ddd41e9ba528c5657120a"
+      },
+      {
+        "path": "home-mixer/models/in_network_reply.rs",
+        "sha256": "sha256:816345baa82041cc965291148d412a30caab6cb42114ca151661b959a7e099d1"
+      },
+      {
+        "path": "home-mixer/models/mod.rs",
+        "sha256": "sha256:3086ed8c4b2411e826d19d5d8cbb78934048296c93b11e8eacbc07eb6552701e"
+      },
+      {
+        "path": "home-mixer/models/query.rs",
+        "sha256": "sha256:5c2c5ab52e59188973737fd1c1888370bb6142f0c043efac099e4b689ce1f34f"
+      },
+      {
+        "path": "home-mixer/models/user_features.rs",
+        "sha256": "sha256:cfb3daff99eac518d6c3104615e65c0b64578ec70b6016e5086877edcca82cc1"
+      },
+      {
+        "path": "home-mixer/query_hydrators/blocked_user_ids_query_hydrator.rs",
+        "sha256": "sha256:29a47698f4eba7d1a89af5e637daa553f45dd21a23095008b82fc904d75d3b1d"
+      },
+      {
+        "path": "home-mixer/query_hydrators/cached_posts_query_hydrator.rs",
+        "sha256": "sha256:c762a09fb96f74a99c5fea6c070731c5f8b4508e12f5e522455ad72938e28400"
+      },
+      {
+        "path": "home-mixer/query_hydrators/followed_grok_topics_query_hydrator.rs",
+        "sha256": "sha256:599365f651354c9bde84a2599519e64550d4e7ae15a4ea6f416e992ae9a832b8"
+      },
+      {
+        "path": "home-mixer/query_hydrators/followed_starter_packs_query_hydrator.rs",
+        "sha256": "sha256:04dcfb1dbb58d93c7700fa2443743cfa589c8d1b5e0b1843c7385fe3859f2f5a"
+      },
+      {
+        "path": "home-mixer/query_hydrators/followed_user_ids_query_hydrator.rs",
+        "sha256": "sha256:0f73417f4c5cec29173de04b82796c3f0f2f4aa89300e116f5928c4bc67bb309"
+      },
+      {
+        "path": "home-mixer/query_hydrators/impressed_posts_query_hydrator.rs",
+        "sha256": "sha256:4f6ac8dc7d48b3772e7daed19e3c2efb6693560fe15c8c17244767b1dfc221a3"
+      },
+      {
+        "path": "home-mixer/query_hydrators/impression_bloom_filter_query_hydrator.rs",
+        "sha256": "sha256:71be4fecfec17a1a414d3a073c6f360c4d333c267afc25e5714b6210414288a1"
+      },
+      {
+        "path": "home-mixer/query_hydrators/inferred_grok_topics_query_hydrator.rs",
+        "sha256": "sha256:db06d8cb56b9c71750b05108a145e9710c4c45e00f74720a9804ca9f823a5a0e"
+      },
+      {
+        "path": "home-mixer/query_hydrators/ip_query_hydrator.rs",
+        "sha256": "sha256:fa970086d075374207514a55de7467735a36a932023cbe095d0381e3cd5e5632"
+      },
+      {
+        "path": "home-mixer/query_hydrators/mod.rs",
+        "sha256": "sha256:88363d5475b8a768f456240b04b59ece8558b90706617a3d70e970d50187cba1"
+      },
+      {
+        "path": "home-mixer/query_hydrators/muted_user_ids_query_hydrator.rs",
+        "sha256": "sha256:1aeb9866a0da1497458ceb14be7ba9b6b51d4b60203e69622f6587f59d7ef4a0"
+      },
+      {
+        "path": "home-mixer/query_hydrators/mutual_follow_query_hydrator.rs",
+        "sha256": "sha256:eb98c66d74972ffa9b6967dafe425906c958d029fb3d1a9636b23cd1884b4a81"
+      },
+      {
+        "path": "home-mixer/query_hydrators/past_request_timestamps_query_hydrator.rs",
+        "sha256": "sha256:fad39ff8baeb40e47069dec7f19735a7641c46a695885c877f74802833449994"
+      },
+      {
+        "path": "home-mixer/query_hydrators/retrieval_sequence_query_hydrator.rs",
+        "sha256": "sha256:ea7fdc7d1f1fbc4889ed0ae4ace6e60e51870b926190cab47078e3f3cf696cb7"
+      },
+      {
+        "path": "home-mixer/query_hydrators/scoring_sequence_query_hydrator.rs",
+        "sha256": "sha256:6aabc7b7a5b5ce3f42b25759f6203d4416e00a6bde2c7a4391f64848ede034ee"
+      },
+      {
+        "path": "home-mixer/query_hydrators/served_history_query_hydrator.rs",
+        "sha256": "sha256:51fc202033d9503328d190e9d02b28009a5d7e87416a2a3a79ee30a1339df4cb"
+      },
+      {
+        "path": "home-mixer/query_hydrators/subscribed_user_ids_query_hydrator.rs",
+        "sha256": "sha256:c5abc5c7b111e5e16cb2e365b1cd1726f26c0b745a2b9fb32fa8e67c6120e220"
+      },
+      {
+        "path": "home-mixer/query_hydrators/user_action_seq_query_hydrator.rs",
+        "sha256": "sha256:b5386debe72af93c91a25aa491cf1d06b5be64933695e4c28b26b287512cef06"
+      },
+      {
+        "path": "home-mixer/query_hydrators/user_demographics_query_hydrator.rs",
+        "sha256": "sha256:b279f04d0b04eb15dd3e2729e3fc74825822e2965efe5beb26691cb329f0bf84"
+      },
+      {
+        "path": "home-mixer/query_hydrators/user_features_query_hydrator.rs",
+        "sha256": "sha256:ff0439d1b5bc4e4e1e51953330558d9eda8734f08815899df38f245f9789729d"
+      },
+      {
+        "path": "home-mixer/query_hydrators/user_inferred_gender_query_hydrator.rs",
+        "sha256": "sha256:277fcf382f30fa168268d2a8907954527ad0e86e61f60c54f5664f03a992f3bb"
+      },
+      {
+        "path": "home-mixer/scored_posts_server.rs",
+        "sha256": "sha256:a3d3b8241640884bee1e6e50fcc721f1078ae04970266f2b0d72efc2596d054f"
+      },
+      {
+        "path": "home-mixer/scorers/author_diversity_scorer.rs",
+        "sha256": "sha256:8182771c16a8a8097a6e6840ad7931e66a60e9a870a1edf876fae66209d02a06"
+      },
+      {
+        "path": "home-mixer/scorers/mod.rs",
+        "sha256": "sha256:73c05af783fb907b0e2862cb6dc0125d1fd330ca1a1389366ed47cc13f74390d"
+      },
+      {
+        "path": "home-mixer/scorers/oon_scorer.rs",
+        "sha256": "sha256:3c4f2c72260012059b096d684707cf959182ef84aa333bd4d49d61d1a70c41f7"
+      },
+      {
+        "path": "home-mixer/scorers/phoenix_scorer.rs",
+        "sha256": "sha256:a2cfc3b3c73629e0cb25cf31473c0e3472fb263fdad9946fa771128a817eb9d6"
+      },
+      {
+        "path": "home-mixer/scorers/ranking_scorer.rs",
+        "sha256": "sha256:15fa66f1726b64f0fa3f387d9b7a4823bf95764d3fd37ce2f2ec51d99acd426b"
+      },
+      {
+        "path": "home-mixer/scorers/vm_ranker.rs",
+        "sha256": "sha256:a0c98348bbf197703cd2e038f725ea19521d139f9f76326538b5e091e774ef5a"
+      },
+      {
+        "path": "home-mixer/scorers/weighted_scorer.rs",
+        "sha256": "sha256:0072cc968eaa6622665ad93ef59e319bdfd3e8aff360dff84f57b5ba46f29952"
+      },
+      {
+        "path": "home-mixer/selectors/blender_selector.rs",
+        "sha256": "sha256:e5e4e6e6062e2af3acfd3905ce77186c03e549c8ff627b07036636e250895a34"
+      },
+      {
+        "path": "home-mixer/selectors/mod.rs",
+        "sha256": "sha256:a36012211ce98c32ccdf14b65cf2352b3fee3ae244916d5d933a42d1e7a83e5b"
+      },
+      {
+        "path": "home-mixer/selectors/top_k_score_selector.rs",
+        "sha256": "sha256:f263471272ea8ab27cf75825c9c62360b746a3eb7f8956cdf1977cf665d9ab2d"
+      },
+      {
+        "path": "home-mixer/server.rs",
+        "sha256": "sha256:b7d063e04b3156480b7fcceccfc4c4ba50c7e0a8fb846117ea1ba32e29e63e82"
+      },
+      {
+        "path": "home-mixer/side_effects/ads_injection_logging_side_effect.rs",
+        "sha256": "sha256:b9de9eba526cd1c190e3aa32bf4cf7cd94bd9ae24e6186d9b4ea0ca948cc0948"
+      },
+      {
+        "path": "home-mixer/side_effects/cache_request_info_side_effect.rs",
+        "sha256": "sha256:64c5544f5b52c57bebb0b6bebc031f4838275b7ca488aac4a37a0cd9c8bfe344"
+      },
+      {
+        "path": "home-mixer/side_effects/client_events_kafka_side_effect.rs",
+        "sha256": "sha256:bf74b58915455168eb6cb3a29784e4344276209d02954d4422e02b2f16407793"
+      },
+      {
+        "path": "home-mixer/side_effects/for_you_response_stats_side_effect.rs",
+        "sha256": "sha256:3e3d13ea8836c8b4afdbbee853181e22a4cebb514b66ea65d5562a81bbab63b0"
+      },
+      {
+        "path": "home-mixer/side_effects/mod.rs",
+        "sha256": "sha256:ea6f39b73500f6aad5dc28fe7a09e23a5eaff73754401242fcf5c70bf3ecde8f"
+      },
+      {
+        "path": "home-mixer/side_effects/mutual_follow_stats_side_effect.rs",
+        "sha256": "sha256:6a070cd701f236740a16624e08eeec66e43f00b0c14c759e6fd1be1642e2f952"
+      },
+      {
+        "path": "home-mixer/side_effects/phoenix_experiments_side_effect.rs",
+        "sha256": "sha256:d7afc9a4c205de93e1607aff8c613e1732219f538e3cc0c012683466b155046f"
+      },
+      {
+        "path": "home-mixer/side_effects/phoenix_request_cache_side_effect.rs",
+        "sha256": "sha256:7409440fd89077ee5c5c66bb559893e89c872439f78bd8d7ade060925025c185"
+      },
+      {
+        "path": "home-mixer/side_effects/publish_seen_ids_to_kafka_side_effect.rs",
+        "sha256": "sha256:84e85f837a98b0f3d919f2a70088ae56e006938762711373eab6e9197660e5a5"
+      },
+      {
+        "path": "home-mixer/side_effects/redis_post_candidate_cache_side_effect.rs",
+        "sha256": "sha256:79df43835f8114bb4dd775cbac281bd1af5f33004227c0f9ef0e43b71692f596"
+      },
+      {
+        "path": "home-mixer/side_effects/reranking_kafka_side_effect.rs",
+        "sha256": "sha256:06bc5a7aa0dd9c38a1360b2cb24d32177cbe962e8f84abc8283d5a3b9d0a45ec"
+      },
+      {
+        "path": "home-mixer/side_effects/scored_stats_side_effect.rs",
+        "sha256": "sha256:d132931d62c5a9c11b303219dc8ba81217b9cc1b993b30ffe849948aa7b50b22"
+      },
+      {
+        "path": "home-mixer/side_effects/served_candidates_kafka_side_effect.rs",
+        "sha256": "sha256:c8823e0dfe1b9021f94aa61b281b25580253e0aea96ef6e438aea13510bb684c"
+      },
+      {
+        "path": "home-mixer/side_effects/truncate_served_history_side_effect.rs",
+        "sha256": "sha256:8379cfdd077fffc9ebabd70aaeffe807d762c851dc65027dd7acf4950d93f5ce"
+      },
+      {
+        "path": "home-mixer/side_effects/update_past_request_timestamps_side_effect.rs",
+        "sha256": "sha256:4a91cf27df7d8111be81142d88333dd2b6cd7892dbc54ebcdfaef71cf0e3b3de"
+      },
+      {
+        "path": "home-mixer/side_effects/update_served_history_side_effect.rs",
+        "sha256": "sha256:f3c00f0183b2500d3ea026aa8bb30e91218fc6cece72260ab2e1078b2a62ba29"
+      },
+      {
+        "path": "home-mixer/sources/ads_source.rs",
+        "sha256": "sha256:4efd445d7b9c831746a8a055a998aab81b90230732712d8c214b28ca7ff703a6"
+      },
+      {
+        "path": "home-mixer/sources/cached_posts_source.rs",
+        "sha256": "sha256:d50d9b7fc814452497921c9264989d25810aa752ee927e4989a174fcfe200bbe"
+      },
+      {
+        "path": "home-mixer/sources/mod.rs",
+        "sha256": "sha256:f1bfef7b1095657693019e9f7cdd8101cdda950ad093ee9102c07fa6b56994e7"
+      },
+      {
+        "path": "home-mixer/sources/phoenix_moe_source.rs",
+        "sha256": "sha256:be7bac7800f0b1b4a486323b49aaed4a465b8015151a04ea01f34e7be1abd25e"
+      },
+      {
+        "path": "home-mixer/sources/phoenix_source.rs",
+        "sha256": "sha256:464e9db04742f3cfaab3b59156fe51b7269150e1f58a87b9720a320b43b56399"
+      },
+      {
+        "path": "home-mixer/sources/phoenix_topics_source.rs",
+        "sha256": "sha256:b4e1e573321b7387e257826d6f11804247e4527fd074cc7033b9552ace3d836c"
+      },
+      {
+        "path": "home-mixer/sources/prompts_source.rs",
+        "sha256": "sha256:6ac27845865077151cf1dff90b3b825d726e4003180718aa54679414b16318cd"
+      },
+      {
+        "path": "home-mixer/sources/push_to_home_source.rs",
+        "sha256": "sha256:db7a1206f7492406c0cad00c47453fd01e0634836c739d147dcf2a5db8b00971"
+      },
+      {
+        "path": "home-mixer/sources/scored_posts_source.rs",
+        "sha256": "sha256:dca45bf859fe5d02738fa442277ddb5eb6fca3cfc058edca7f80e39bd4e035a6"
+      },
+      {
+        "path": "home-mixer/sources/thunder_source.rs",
+        "sha256": "sha256:3582f5eb60860b1a8d0eee5bded9a45affb7d1b98b084a16dfd6cb9e9ecf20f3"
+      },
+      {
+        "path": "home-mixer/sources/tweet_mixer_source.rs",
+        "sha256": "sha256:e2c5339bc046a5a1138f72d49af53860c9059a3030dd2205ba95fa3e5c45c7df"
+      },
+      {
+        "path": "home-mixer/sources/who_to_follow_source.rs",
+        "sha256": "sha256:b58e5c3ab9971ed0e6ce853caa85096059499e914fca9d857cb31800364a7237"
+      },
+      {
+        "path": "phoenix/README.md",
+        "sha256": "sha256:cc3fd1557e58f8cadb16fe55340355af8a73693c1a55c59838c3d09be394f8c9"
+      },
+      {
+        "path": "phoenix/grok.py",
+        "sha256": "sha256:e703c862619deaae60b8740ec31b44bf470f06a98c88a2ef282e91b7c02a4964"
+      },
+      {
+        "path": "phoenix/pyproject.toml",
+        "sha256": "sha256:4d6fb84159502351750649ea242aad96e41983637ce537f9f9c8a86bf0112504"
+      },
+      {
+        "path": "phoenix/recsys_model.py",
+        "sha256": "sha256:a1e1613de0d147aec2c5cdd7af2a380bfdaec9e9e8df93899c77717a0c9bc608"
+      },
+      {
+        "path": "phoenix/recsys_retrieval_model.py",
+        "sha256": "sha256:94d8a5ba8886a29a1021bbdd32a8596b8e46657c08beda35472cdff50f57c4d5"
+      },
+      {
+        "path": "phoenix/run_pipeline.py",
+        "sha256": "sha256:00904ffa8d3d216c9e22bb104d6ad0f1cf202e52e0ef5e897901c2e97a30e830"
+      },
+      {
+        "path": "phoenix/run_ranker.py",
+        "sha256": "sha256:91e13278005d53ee0a7627fc89db90e2a1d9e53828acc983e4e97582132bc656"
+      },
+      {
+        "path": "phoenix/run_retrieval.py",
+        "sha256": "sha256:2b5b338c6561f84f230481bcd47860073d8c82ceb95f3a439cdf64a58fe86b23"
+      },
+      {
+        "path": "phoenix/runners.py",
+        "sha256": "sha256:51d9af372c37f12c1693b83353295d18e542ae5d7395f48173ecf86f92e732e1"
+      },
+      {
+        "path": "phoenix/test_recsys_model.py",
+        "sha256": "sha256:e5a11497d4ef7d752b4fca9b5febbd2071225bcc47bd54bafaadc7fcea1dd7e3"
+      },
+      {
+        "path": "phoenix/test_recsys_retrieval_model.py",
+        "sha256": "sha256:c714a11606465522a74ae04a90d83d1550d3686f6b214f6baadd4d6558dafedb"
+      },
+      {
+        "path": "phoenix/uv.lock",
+        "sha256": "sha256:110fe04979ebfa2176d06fd00317bc490183eddf369da7895553ba84ffff4416"
+      },
+      {
+        "path": "thunder/deserializer.rs",
+        "sha256": "sha256:7bb1379d552ed14db506bfcb157dc411f13890918c96bff5058bd29893b817a2"
+      },
+      {
+        "path": "thunder/kafka/mod.rs",
+        "sha256": "sha256:bfdff5d5840f77f7b68d4b4c5da8fb43c0e45be94118ee729941e5c06f010fdb"
+      },
+      {
+        "path": "thunder/kafka/tweet_events_listener.rs",
+        "sha256": "sha256:7673f22008beef8ccb54d0aac798f3db6fa2bfd91db61a1f6a2277275f9d36de"
+      },
+      {
+        "path": "thunder/kafka/tweet_events_listener_v2.rs",
+        "sha256": "sha256:8916e008bbdf81a2041b5121251190821aa465e42ef933893d731482ab2f19e4"
+      },
+      {
+        "path": "thunder/kafka/utils.rs",
+        "sha256": "sha256:b369464ca27b900ecbe03084e83317795d5261ea426ca883cdb798f77f144720"
+      },
+      {
+        "path": "thunder/kafka_utils.rs",
+        "sha256": "sha256:3d6c06fd21c54f87f06921ecfc1857ae4f611f0c0665836df40e112e7c59cf68"
+      },
+      {
+        "path": "thunder/lib.rs",
+        "sha256": "sha256:5203cfffac2d4ea2305099577d75f02335c6607ff9c16b0e353447af4bd40a58"
+      },
+      {
+        "path": "thunder/main.rs",
+        "sha256": "sha256:19b37363bc20d27f575438e13dba2a771195265a22469c1758eba6c2822bcd90"
+      },
+      {
+        "path": "thunder/posts/mod.rs",
+        "sha256": "sha256:1494eb72209a5e1274c34fb68e9dc402e6f371139144b396cc1fa17b0c1fbea7"
+      },
+      {
+        "path": "thunder/posts/post_store.rs",
+        "sha256": "sha256:bfebb4345e58568285f14c96f95822c8d7aa2ba91a7d891e8f91710c64992499"
+      },
+      {
+        "path": "thunder/thunder_service.rs",
+        "sha256": "sha256:e61bb01d2bf5e541976b88d94330a9048f8a0723aab1d8aabfaa963a32d7e9f0"
+      }
+    ],
+    "algorithm_source_root": "merkle-rfc6962-sha256:de7a8b4dc7686feee006374f755cfda538a77d4777470e49664d68edca05c7f1",
     "pipeline": "phoenix/run_pipeline.py",
     "execution_mode": "real",
     "run_command": [
@@ -30,41 +882,41 @@
     ],
     "model_artifacts": [
       {
-        "path": "phoenix/artifacts/oss-phoenix-artifacts/example_sequence.json",
+        "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/example_sequence.json",
         "sha256": "sha256:ec53ed1d58f8b69aa6ee121e8cf1090e10e89cf4cd635ccf22b3d314d50838e7"
       },
       {
-        "path": "phoenix/artifacts/oss-phoenix-artifacts/ranker/config.json",
+        "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/ranker/config.json",
         "sha256": "sha256:030b3c963a0e1a5061b2a79acb4c9bffb669cc6bfd96c7fa007d8b22b86979ec"
       },
       {
-        "path": "phoenix/artifacts/oss-phoenix-artifacts/ranker/embedding_tables.npz",
+        "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/ranker/embedding_tables.npz",
         "sha256": "sha256:8742dbe1c395338862e8bd6455ebe3561034fb51ce846483b46040ce2cd23ec2"
       },
       {
-        "path": "phoenix/artifacts/oss-phoenix-artifacts/ranker/model_params.npz",
+        "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/ranker/model_params.npz",
         "sha256": "sha256:b7363205f4c5f66debff587a20f88564c6e7b8640d285a63c4a8d34995dbc598"
       },
       {
-        "path": "phoenix/artifacts/oss-phoenix-artifacts/retrieval/config.json",
+        "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/retrieval/config.json",
         "sha256": "sha256:08df7f803ee96a92f64d3aa8c666d6f1312f067c89cf49785373e131b347237a"
       },
       {
-        "path": "phoenix/artifacts/oss-phoenix-artifacts/retrieval/embedding_tables.npz",
+        "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/retrieval/embedding_tables.npz",
         "sha256": "sha256:1921c47f981d4029f900b71804ca23e0230286b4f8de1abcd7654a152801384a"
       },
       {
-        "path": "phoenix/artifacts/oss-phoenix-artifacts/retrieval/model_params.npz",
+        "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/retrieval/model_params.npz",
         "sha256": "sha256:b71b44b25398b22328bd44f0b4b71f39ba14f9e9efb8e21b74d9c2b6584274f6"
       },
       {
-        "path": "phoenix/artifacts/oss-phoenix-artifacts/sports_corpus.npz",
+        "path": "../../x-algorithm/phoenix/artifacts/oss-phoenix-artifacts/sports_corpus.npz",
         "sha256": "sha256:80b7660f28e325bd2eccc9c8e7eae5e3a5d7cbe13089aa151824aa596fdb143e"
       }
     ],
-    "model_artifacts_root": "merkle-rfc6962-sha256:f2bf8621ed66bcc445228857e88f3dcb5fd42d3117e61284ca10e40d7324d888",
-    "config_hash": "sha256:2c97a5da32afa31138d4eab6b2a909734c8f02cab87022c147fe9432e7792c39",
-    "input_commitment": "merkle-rfc6962-sha256:e91ee0b3bd9e7366f5a58b0272b1b868197f2ae0d32e1701520ea4eca071bf6b",
+    "model_artifacts_root": "merkle-rfc6962-sha256:821776ba371c3eb8afd2820db41a40bdfd51bd57d7ef589d45ffd164309abb08",
+    "config_hash": "sha256:9cdfa0c5c38dde0315df11fc67832bc5687c2db37f500b1ccb7d094d97cff12f",
+    "input_commitment": "merkle-rfc6962-sha256:f4c9cd2d07168e2fa33ece3311ce29dfd8bda9a52e8cfbeefb390fd75a7e1772",
     "input_commitment_note": "Merkle root over sequence/corpus references. Production deployments should commit to feature vectors before ranking.",
     "output_root": "merkle-rfc6962-sha256:049e86143f9cf05b6d3142a977bff028ce243cfb45859346a0a1601c107cbdc0",
     "output_top_n_optional": {
@@ -192,18 +1044,487 @@
         }
       ]
     },
-    "selected_count": 39,
+    "structured_output_version": "phoenix-table-v1",
+    "ranked_items_count": 30,
+    "ranked_items_root": "merkle-rfc6962-sha256:4eff4e9ba7004994adccad71aa9ce4097798bb714dca4c3dd341c279155bc001",
+    "ranked_items_top_n_optional": {
+      "top_n": 30,
+      "items": [
+        {
+          "rank": 1,
+          "post_url": "https://x.com/a/status/2055371034010726771",
+          "post_id": "2055371034010726771",
+          "score": 0.3922,
+          "retrieval_score": 0.898,
+          "favorite_probability": 0.293,
+          "reply_probability": 0.0003,
+          "repost_probability": 0.0114,
+          "dwell_probability": 0.4785,
+          "vqv_score": 0.0781,
+          "topics": [
+            "Sports",
+            "NBA"
+          ]
+        },
+        {
+          "rank": 2,
+          "post_url": "https://x.com/a/status/2055373931960246693",
+          "post_id": "2055373931960246693",
+          "score": 0.3906,
+          "retrieval_score": 0.8892,
+          "favorite_probability": 0.293,
+          "reply_probability": 0.0002,
+          "repost_probability": 0.0022,
+          "dwell_probability": 0.4844,
+          "vqv_score": 0.1055,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 3,
+          "post_url": "https://x.com/a/status/2055373509635797438",
+          "post_id": "2055373509635797438",
+          "score": 0.3836,
+          "retrieval_score": 0.8873,
+          "favorite_probability": 0.293,
+          "reply_probability": 0.0003,
+          "repost_probability": 0.0033,
+          "dwell_probability": 0.4473,
+          "vqv_score": 0.0498,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 4,
+          "post_url": "https://x.com/a/status/2055335444297011304",
+          "post_id": "2055335444297011304",
+          "score": 0.3511,
+          "retrieval_score": 0.9382,
+          "favorite_probability": 0.2402,
+          "reply_probability": 0.0009,
+          "repost_probability": 0.0061,
+          "dwell_probability": 0.543,
+          "vqv_score": 0.1128,
+          "topics": [
+            "Sports",
+            "NBA"
+          ]
+        },
+        {
+          "rank": 5,
+          "post_url": "https://x.com/a/status/2055363262837821760",
+          "post_id": "2055363262837821760",
+          "score": 0.3284,
+          "retrieval_score": 0.9158,
+          "favorite_probability": 0.2314,
+          "reply_probability": 0.0002,
+          "repost_probability": 0.0025,
+          "dwell_probability": 0.4805,
+          "vqv_score": 0.125,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 6,
+          "post_url": "https://x.com/a/status/2055361859520254016",
+          "post_id": "2055361859520254016",
+          "score": 0.3149,
+          "retrieval_score": 0.8931,
+          "favorite_probability": 0.2285,
+          "reply_probability": 0.0001,
+          "repost_probability": 0.0037,
+          "dwell_probability": 0.4258,
+          "vqv_score": 0.0913,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 7,
+          "post_url": "https://x.com/a/status/2055324672833491097",
+          "post_id": "2055324672833491097",
+          "score": 0.2975,
+          "retrieval_score": 0.8865,
+          "favorite_probability": 0.1973,
+          "reply_probability": 0.0008,
+          "repost_probability": 0.0125,
+          "dwell_probability": 0.4805,
+          "vqv_score": 0.1177,
+          "topics": [
+            "Sports",
+            "Premier League"
+          ]
+        },
+        {
+          "rank": 8,
+          "post_url": "https://x.com/a/status/2055135488894546385",
+          "post_id": "2055135488894546385",
+          "score": 0.2844,
+          "retrieval_score": 0.8835,
+          "favorite_probability": 0.1924,
+          "reply_probability": 0.0003,
+          "repost_probability": 0.0056,
+          "dwell_probability": 0.4512,
+          "vqv_score": 0.1113,
+          "topics": [
+            "Sports",
+            "American Football"
+          ]
+        },
+        {
+          "rank": 9,
+          "post_url": "https://x.com/a/status/2055341198764642324",
+          "post_id": "2055341198764642324",
+          "score": 0.2825,
+          "retrieval_score": 0.8965,
+          "favorite_probability": 0.1914,
+          "reply_probability": 0.0004,
+          "repost_probability": 0.002,
+          "dwell_probability": 0.4512,
+          "vqv_score": 0.1177,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 10,
+          "post_url": "https://x.com/a/status/2055381228870594706",
+          "post_id": "2055381228870594706",
+          "score": 0.2775,
+          "retrieval_score": 0.9105,
+          "favorite_probability": 0.1729,
+          "reply_probability": 0.0001,
+          "repost_probability": 0.0074,
+          "dwell_probability": 0.5117,
+          "vqv_score": 0.1318,
+          "topics": [
+            "Sports",
+            "NHL"
+          ]
+        },
+        {
+          "rank": 11,
+          "post_url": "https://x.com/a/status/2055356462411468890",
+          "post_id": "2055356462411468890",
+          "score": 0.2659,
+          "retrieval_score": 0.8968,
+          "favorite_probability": 0.1572,
+          "reply_probability": 0.0006,
+          "repost_probability": 0.02,
+          "dwell_probability": 0.5117,
+          "vqv_score": 0.1465,
+          "topics": [
+            "Sports",
+            "Baseball"
+          ]
+        },
+        {
+          "rank": 12,
+          "post_url": "https://x.com/a/status/2055377759111659542",
+          "post_id": "2055377759111659542",
+          "score": 0.2647,
+          "retrieval_score": 0.8833,
+          "favorite_probability": 0.1826,
+          "reply_probability": 0.0001,
+          "repost_probability": 0.004,
+          "dwell_probability": 0.4043,
+          "vqv_score": 0.1025,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 13,
+          "post_url": "https://x.com/a/status/2055381914471817631",
+          "post_id": "2055381914471817631",
+          "score": 0.2632,
+          "retrieval_score": 0.9055,
+          "favorite_probability": 0.1826,
+          "reply_probability": 0.0003,
+          "repost_probability": 0.005,
+          "dwell_probability": 0.3945,
+          "vqv_score": 0.0747,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 14,
+          "post_url": "https://x.com/a/status/2055336362799239454",
+          "post_id": "2055336362799239454",
+          "score": 0.2591,
+          "retrieval_score": 0.8972,
+          "favorite_probability": 0.1631,
+          "reply_probability": 0.0001,
+          "repost_probability": 0.001,
+          "dwell_probability": 0.4785,
+          "vqv_score": 0.1484,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 15,
+          "post_url": "https://x.com/a/status/2055335384406475212",
+          "post_id": "2055335384406475212",
+          "score": 0.2553,
+          "retrieval_score": 0.9057,
+          "favorite_probability": 0.1641,
+          "reply_probability": 0.0006,
+          "repost_probability": 0.0023,
+          "dwell_probability": 0.4512,
+          "vqv_score": 0.0737,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 16,
+          "post_url": "https://x.com/a/status/2055374768849785332",
+          "post_id": "2055374768849785332",
+          "score": 0.2548,
+          "retrieval_score": 0.8899,
+          "favorite_probability": 0.1426,
+          "reply_probability": 0.0001,
+          "repost_probability": 0.0092,
+          "dwell_probability": 0.5469,
+          "vqv_score": 0.208,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 17,
+          "post_url": "https://x.com/a/status/2055347420788105262",
+          "post_id": "2055347420788105262",
+          "score": 0.253,
+          "retrieval_score": 0.8899,
+          "favorite_probability": 0.1709,
+          "reply_probability": 0.0006,
+          "repost_probability": 0.0033,
+          "dwell_probability": 0.4043,
+          "vqv_score": 0.1025,
+          "topics": [
+            "Sports",
+            "NBA"
+          ]
+        },
+        {
+          "rank": 18,
+          "post_url": "https://x.com/a/status/2055377493776105921",
+          "post_id": "2055377493776105921",
+          "score": 0.2522,
+          "retrieval_score": 0.8802,
+          "favorite_probability": 0.1592,
+          "reply_probability": 0.0009,
+          "repost_probability": 0.0078,
+          "dwell_probability": 0.4512,
+          "vqv_score": 0.0264,
+          "topics": [
+            "Sports",
+            "Ice Hockey"
+          ]
+        },
+        {
+          "rank": 19,
+          "post_url": "https://x.com/a/status/2055376487688073615",
+          "post_id": "2055376487688073615",
+          "score": 0.2485,
+          "retrieval_score": 0.8859,
+          "favorite_probability": 0.1523,
+          "reply_probability": 0.0002,
+          "repost_probability": 0.0065,
+          "dwell_probability": 0.4707,
+          "vqv_score": 0.1143,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 20,
+          "post_url": "https://x.com/a/status/2055346423781102007",
+          "post_id": "2055346423781102007",
+          "score": 0.2446,
+          "retrieval_score": 0.892,
+          "favorite_probability": 0.1768,
+          "reply_probability": 0.0002,
+          "repost_probability": 0.0097,
+          "dwell_probability": 0.3242,
+          "vqv_score": 0.061,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 21,
+          "post_url": "https://x.com/a/status/2055375168743051751",
+          "post_id": "2055375168743051751",
+          "score": 0.2418,
+          "retrieval_score": 0.897,
+          "favorite_probability": 0.1445,
+          "reply_probability": 0.0007,
+          "repost_probability": 0.0145,
+          "dwell_probability": 0.4629,
+          "vqv_score": 0.085,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 22,
+          "post_url": "https://x.com/a/status/2055374073572491315",
+          "post_id": "2055374073572491315",
+          "score": 0.2416,
+          "retrieval_score": 0.8791,
+          "favorite_probability": 0.1484,
+          "reply_probability": 0.0001,
+          "repost_probability": 0.0056,
+          "dwell_probability": 0.457,
+          "vqv_score": 0.1533,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 23,
+          "post_url": "https://x.com/a/status/2055329057282080948",
+          "post_id": "2055329057282080948",
+          "score": 0.2414,
+          "retrieval_score": 0.8835,
+          "favorite_probability": 0.1602,
+          "reply_probability": 0.0002,
+          "repost_probability": 0.0035,
+          "dwell_probability": 0.4004,
+          "vqv_score": 0.1387,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 24,
+          "post_url": "https://x.com/a/status/2055339613888348202",
+          "post_id": "2055339613888348202",
+          "score": 0.234,
+          "retrieval_score": 0.881,
+          "favorite_probability": 0.1445,
+          "reply_probability": 0.0004,
+          "repost_probability": 0.024,
+          "dwell_probability": 0.4102,
+          "vqv_score": 0.0294,
+          "topics": [
+            "Sports",
+            "NBA"
+          ]
+        },
+        {
+          "rank": 25,
+          "post_url": "https://x.com/a/status/2055357041913315845",
+          "post_id": "2055357041913315845",
+          "score": 0.2262,
+          "retrieval_score": 0.8938,
+          "favorite_probability": 0.1387,
+          "reply_probability": 0.0005,
+          "repost_probability": 0.028,
+          "dwell_probability": 0.3945,
+          "vqv_score": 0.0447,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 26,
+          "post_url": "https://x.com/a/status/2055378675101548915",
+          "post_id": "2055378675101548915",
+          "score": 0.2229,
+          "retrieval_score": 0.8983,
+          "favorite_probability": 0.1196,
+          "reply_probability": 0.0011,
+          "repost_probability": 0.0339,
+          "dwell_probability": 0.4629,
+          "vqv_score": 0.063,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 27,
+          "post_url": "https://x.com/a/status/2055361395294916757",
+          "post_id": "2055361395294916757",
+          "score": 0.2226,
+          "retrieval_score": 0.8818,
+          "favorite_probability": 0.1484,
+          "reply_probability": 0.0001,
+          "repost_probability": 0.0059,
+          "dwell_probability": 0.3613,
+          "vqv_score": 0.1094,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 28,
+          "post_url": "https://x.com/a/status/2055362628608835634",
+          "post_id": "2055362628608835634",
+          "score": 0.2183,
+          "retrieval_score": 0.8835,
+          "favorite_probability": 0.1289,
+          "reply_probability": 0.0005,
+          "repost_probability": 0.0197,
+          "dwell_probability": 0.416,
+          "vqv_score": 0.0693,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 29,
+          "post_url": "https://x.com/a/status/2055363359139144023",
+          "post_id": "2055363359139144023",
+          "score": 0.2141,
+          "retrieval_score": 0.8797,
+          "favorite_probability": 0.1406,
+          "reply_probability": 0.0006,
+          "repost_probability": 0.0031,
+          "dwell_probability": 0.3613,
+          "vqv_score": 0.0654,
+          "topics": [
+            "Sports"
+          ]
+        },
+        {
+          "rank": 30,
+          "post_url": "https://x.com/a/status/2055366786909122690",
+          "post_id": "2055366786909122690",
+          "score": 0.2083,
+          "retrieval_score": 0.9339,
+          "favorite_probability": 0.1426,
+          "reply_probability": 0.0002,
+          "repost_probability": 0.0025,
+          "dwell_probability": 0.3242,
+          "vqv_score": 0.1523,
+          "topics": [
+            "Sports"
+          ]
+        }
+      ]
+    },
+    "parser_warnings": [],
+    "selected_count": 30,
+    "stdout_line_count": 39,
     "stdout_hash": "sha256:9ccd6dba040f122ea849c4c20eb4324b45da192abec9f6310592a6b8a1aacfe8",
-    "stderr_hash": "sha256:b7e99369020962c9205dc4305d81b7f55ab5c2f7fb7da6ad5fc1ab0e8d1a751a",
+    "stderr_hash": "sha256:0eaaf6d6d8e5c1f430280df112700ce30887b5180252ffdc028991d15e44044d",
     "top_k_retrieval": 200,
     "top_k_display": 30,
     "runtime_environment": {
-      "wrapper": "ScopeBlind/x-algorithm-receipts@0.1.0",
+      "wrapper": "VeritasActa/x-algorithm-receipts@0.3.0",
       "node": "v22.20.0",
       "platform": "darwin",
       "arch": "arm64"
     },
     "caveat": "Receipts prove that a specific output was bound to specific code, model artifacts, config, and input commitments. They do not prove the output is fair, truthful, or beneficial."
   },
-  "signature": "cfe4b24ca7a9da5dc2a3c96170fe2dd087b1836a183073da333adc5b92b6f719ab4805eb5011d5f98cbb6ce5a8f92fe12a7a656f757c199345e4e04e0e4b5000"
+  "signature": "3b71d15b4261da277ecf10c1a9546eaec507e9de19f053b92f02794cbc2ceb3e3fa61ae5d05d499615361caa7f131a8cf50d59ba2b17770686a46498dd3d9800"
 }

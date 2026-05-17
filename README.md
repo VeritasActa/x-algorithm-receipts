@@ -60,9 +60,9 @@ This demonstrates how reproducibility can be made **cryptographically checkable*
 
 Committed pair lives in [`examples/reproducibility-pair/`](examples/reproducibility-pair/). To regenerate (with fresh timestamps) the committed example pair, run `npm run repro-demo -- --update-committed`. By default, the script writes to a gitignored `.repro-tmp/` directory so re-runs don't dirty the committed examples.
 
-## Real mode against an actual Phoenix pipeline (v0.2.0)
+## Real mode against an actual Phoenix pipeline (v0.3.0)
 
-The repo ships a real-mode receipt at [`examples/x-feed-real.receipt.json`](examples/x-feed-real.receipt.json) bound to a real ranking pass against `xai-org/x-algorithm@c3ef3307baea78655d0db2672cf2aa51a0381454`. Verify it the same way as the mock receipt:
+The repo ships a real-mode receipt at [`examples/x-feed-real.receipt.json`](examples/x-feed-real.receipt.json) bound to a real ranking pass against `xai-org/x-algorithm@0bfc2795d308f90032544322747caacd535f75ae`. Verify it the same way as the mock receipt:
 
 ```sh
 npx @veritasacta/verify examples/x-feed-real.receipt.json --jwks examples/real.jwks
@@ -80,15 +80,16 @@ node scripts/run-x-algorithm-with-receipt.mjs \
   --x-algorithm-dir ./x-algorithm \
   --artifacts-dir ./x-algorithm/phoenix/artifacts/oss-phoenix-artifacts \
   --receipt-out receipts/x-feed-real.receipt.json \
-  --jwks-out receipts/x-feed-real.jwks
+  --jwks-out receipts/x-feed-real.jwks \
+  --require-structured
 
 npx @veritasacta/verify receipts/x-feed-real.receipt.json --jwks receipts/x-feed-real.jwks
 node scripts/inspect-receipt.mjs receipts/x-feed-real.receipt.json
 ```
 
-The real wrapper executes `uv run run_pipeline.py` inside `x-algorithm/phoenix` as a subprocess, hashes all model and config and corpus files, captures the exact stdout (and stderr) bytes the pipeline produced, signs the audit event, and writes a local JWKS for offline verification.
+The real wrapper executes `uv run run_pipeline.py` inside `x-algorithm/phoenix` as a subprocess, hashes all source/model/config/corpus files, captures the exact stdout and stderr bytes the pipeline produced, parses Phoenix's ranked table into structured top-N records, signs the audit event, and writes a local JWKS for offline verification.
 
-**Wording precision matters here:** real mode commits to the **exact Phoenix pipeline output bytes**. It does **not** commit to parsed structured `{rank, post_id, score}` records. A re-runner who reproduces the exact pipeline output reproduces the same `output_root`; a re-runner who gets even minor formatting drift produces a different `output_root` and the receipts do not match. Structured per-item parsing is open work for v0.3.0. See [LIMITATIONS.md](LIMITATIONS.md#real-mode-commits-to-pipeline-output-bytes-not-parsed-records) for the full nuance.
+**Wording precision matters here:** v0.3.0 has two output commitments. `output_root` still commits to the exact Phoenix pipeline stdout lines, preserving byte-level reproducibility checks. `ranked_items_root` commits to parsed structured `{rank, post_id, score, probabilities, topics}` records, giving auditors a semantic top-N disclosure surface. A re-runner who reproduces the same pipeline output and parser result reproduces both roots. See [LIMITATIONS.md](LIMITATIONS.md#real-mode-has-byte-level-and-structured-output-commitments) for the full nuance.
 
 ## Browser verifier (no CLI required)
 
@@ -104,17 +105,22 @@ Core payload fields:
 |---|---|
 | `algorithm_repo` | Source repository for the algorithm implementation. |
 | `algorithm_commit` | Git commit hash for the checked-out algorithm source. |
+| `algorithm_source_root` | Merkle root over source files used by the wrapper. |
 | `pipeline` | Pipeline entry point, currently `phoenix/run_pipeline.py`. |
 | `model_artifacts` | Per-file SHA-256 commitments for model/config/corpus artifacts. |
 | `model_artifacts_root` | Merkle root over `model_artifacts`. |
 | `config_hash` | Hash over config artifact commitments. |
 | `input_commitment` | Merkle root over private or selectively disclosable input references. |
-| `output_root` | Merkle root over the complete ranked output commitment. |
-| `output_top_n_optional` | Optional selectively disclosed top-N output sample. |
+| `output_root` | Merkle root over exact stdout-line commitments. |
+| `output_top_n_optional` | Optional selectively disclosed stdout-line sample. |
+| `ranked_items_root` | Merkle root over parsed structured ranked records. |
+| `ranked_items_top_n_optional` | Optional selectively disclosed structured top-N records. |
 | `selected_count` | Count of committed ranked outputs. |
 | `caveat` | Explicit limitation of the proof claim. |
 
 See [`docs/audit-event-schema.md`](docs/audit-event-schema.md) and [`schemas/recommender-post-ranking-v1.schema.json`](schemas/recommender-post-ranking-v1.schema.json).
+
+Release notes: [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Why a wrapper, not a PR?
 

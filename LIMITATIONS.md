@@ -34,17 +34,21 @@ Receipts do **not** prove any of the following. These are different audit proble
 
 The cryptographic guarantee is identical in both modes. The semantic content differs: real mode binds to actual model artifact bytes; mock mode binds to synthetic placeholders.
 
-## Real mode commits to pipeline output bytes, not parsed records
+## Real mode has byte-level and structured output commitments
 
-The v0.2.0 real-mode wrapper executes the Phoenix pipeline as a subprocess and hashes the exact bytes of stdout (plus stderr) the pipeline emitted. The included `output_top_n_optional.items` array contains literal output lines as printed by the pipeline (including header rows like `"PIPELINE RESULTS - User 12345"`), not parsed `{rank, post_id, score}` records.
+The v0.3.0 real-mode wrapper executes the Phoenix pipeline as a subprocess and records two output commitments:
+
+- `output_root`: a Merkle root over the exact non-empty stdout lines printed by the Phoenix pipeline. This preserves byte-level reproducibility checks.
+- `ranked_items_root`: a Merkle root over structured rows parsed from Phoenix's ranking table. Each item includes rank, post URL, post ID, score, component probabilities, VQV score, and topics.
 
 This means:
 
-- A re-runner who produces identical pipeline output will produce a matching `output_root`. **This is the property the receipt actually proves.**
-- A re-runner who produces different output (even minor formatting drift) will produce a different `output_root`, and the receipts will not match.
-- The receipt does **not** internally validate the structure of the output. If the pipeline crashed and printed an error message, the receipt would still verify, bound to that error message.
+- A re-runner who produces identical pipeline output will produce a matching `output_root`.
+- A re-runner who produces equivalent parsed rows will produce a matching `ranked_items_root`.
+- A re-runner who gets formatting drift but semantically identical rows may see `output_root` change while `ranked_items_root` stays stable.
+- A re-runner who gets different ranking rows will see `ranked_items_root` change.
 
-A v0.3.0 enhancement (open work) is to parse the Phoenix output into structured per-item records before committing. That gives more semantically useful selective disclosure but does not change the underlying cryptographic property.
+The parser is deliberately narrow: it recognizes the Phoenix demo table format used by `phoenix/run_pipeline.py`. Other recommender systems should define their own structured parser and receipt profile rather than relying on this one.
 
 ## Reproducibility (mock) vs reproducibility (production)
 
@@ -78,7 +82,7 @@ Nothing in this repo is legal advice. The format is published as an IETF Interne
 
 ## Versions
 
-- This document applies to the `v0.2.0` release shipped 16 May 2026.
+- This document applies to the `v0.3.0` release shipped 17 May 2026.
 - Material changes to what receipts prove will be flagged in future revisions of this document and noted in the changelog.
 
 ## Reporting

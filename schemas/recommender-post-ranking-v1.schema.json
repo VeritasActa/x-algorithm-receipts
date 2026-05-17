@@ -14,6 +14,7 @@
     "config_hash",
     "input_commitment",
     "output_root",
+    "ranked_items_root",
     "selected_count",
     "caveat"
   ],
@@ -22,6 +23,21 @@
     "event_kind": { "const": "post_ranking_audit_event" },
     "algorithm_repo": { "type": "string", "format": "uri" },
     "algorithm_commit": { "type": "string", "pattern": "^git:.+" },
+    "algorithm_worktree_dirty": { "type": ["boolean", "null"] },
+    "algorithm_source_note": { "type": "string" },
+    "algorithm_source_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "algorithm_source_root": { "type": "string", "pattern": "^merkle-rfc6962-sha256:[0-9a-f]{64}$" },
     "pipeline": { "type": "string", "minLength": 1 },
     "execution_mode": { "type": "string", "enum": ["mock", "real"] },
     "model_artifacts": {
@@ -40,6 +56,8 @@
     "config_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
     "input_commitment": { "type": "string", "pattern": "^merkle-rfc6962-sha256:[0-9a-f]{64}$" },
     "output_root": { "type": "string", "pattern": "^merkle-rfc6962-sha256:[0-9a-f]{64}$" },
+    "structured_output_version": { "type": "string", "minLength": 1 },
+    "stdout_line_count": { "type": "integer", "minimum": 0 },
     "output_top_n_optional": {
       "type": "object",
       "properties": {
@@ -47,6 +65,40 @@
         "items": { "type": "array" }
       },
       "additionalProperties": true
+    },
+    "ranked_items_count": { "type": "integer", "minimum": 0 },
+    "ranked_items_root": { "type": "string", "pattern": "^merkle-rfc6962-sha256:[0-9a-f]{64}$" },
+    "ranked_items_top_n_optional": {
+      "type": "object",
+      "properties": {
+        "top_n": { "type": "integer", "minimum": 0 },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["rank", "post_url", "score"],
+            "properties": {
+              "rank": { "type": "integer", "minimum": 1 },
+              "post_url": { "type": "string" },
+              "post_id": { "type": ["string", "null"] },
+              "score": { "type": "number" },
+              "retrieval_score": { "type": "number" },
+              "favorite_probability": { "type": "number" },
+              "reply_probability": { "type": "number" },
+              "repost_probability": { "type": "number" },
+              "dwell_probability": { "type": "number" },
+              "vqv_score": { "type": "number" },
+              "topics": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "parser_warnings": {
+      "type": "array",
+      "items": { "type": "string" }
     },
     "selected_count": { "type": "integer", "minimum": 0 },
     "caveat": { "type": "string", "minLength": 1 }

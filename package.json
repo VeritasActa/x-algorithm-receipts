@@ -1,6 +1,6 @@
 {
   "name": "x-algorithm-receipts",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Post-ranking signed receipt wrapper for the published xAI/X For You algorithm demo pipeline.",
   "type": "module",

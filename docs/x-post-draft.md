@@ -2,7 +2,7 @@
 
 Open source shows what could run. Receipts prove what did run.
 
-I built a receipt wrapper for the published X algorithm demo: one Phoenix ranking pass, one signed receipt, offline verification of code commit, model artifact hashes, config hash, input commitment, and output root.
+I built a receipt wrapper for the published X algorithm demo: one Phoenix ranking pass, one signed receipt, offline verification of code commit, source/model artifact hashes, config hash, input commitment, stdout root, and structured ranked-item root.
 
 Repo: [link]
 

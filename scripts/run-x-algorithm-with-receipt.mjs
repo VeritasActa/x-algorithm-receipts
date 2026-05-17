@@ -14,8 +14,10 @@ import {
   verifyReceiptLocally,
   listFilesRecursive,
 } from './lib.mjs';
+import { buildStdoutLineItems, parsePhoenixRankingOutput } from './phoenix-parser.mjs';
 
 const DEFAULT_PRIVATE_KEY = '.tmp/demo.private.jwk';
+const WRAPPER_VERSION = 'VeritasActa/x-algorithm-receipts@0.3.0';
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
@@ -96,11 +98,18 @@ function buildMockAuditEvent(args) {
       top_n: Number(args['top-n'] || 10),
       items: fullRanked.slice(0, Number(args['top-n'] || 10)),
     },
+    structured_output_version: 'synthetic-ranked-items-v1',
+    ranked_items_count: fullRanked.length,
+    ranked_items_root: merkleRoot(fullRanked),
+    ranked_items_top_n_optional: {
+      top_n: Number(args['top-n'] || 10),
+      items: fullRanked.slice(0, Number(args['top-n'] || 10)),
+    },
     selected_count: fullRanked.length,
     top_k_retrieval: Number(args['top-k-retrieval'] || 200),
     top_k_display: Number(args['top-k-display'] || 50),
     runtime_environment: {
-      wrapper: 'ScopeBlind/x-algorithm-receipts@0.1.0',
+      wrapper: WRAPPER_VERSION,
       node: process.version,
       platform: process.platform,
       arch: process.arch,
@@ -120,8 +129,8 @@ function buildRealAuditEvent(args) {
     throw new Error(`missing ${join(phoenixDir, 'run_pipeline.py')}. Pass --x-algorithm-dir /path/to/x-algorithm or use --mock.`);
   }
 
-  const commit = git(xDir, ['rev-parse', 'HEAD']);
-  const status = git(xDir, ['status', '--porcelain']);
+  const gitInfo = resolveAlgorithmGitInfo(xDir, args);
+  const algorithmSourceFiles = collectSourceHashes(xDir);
   const artifactsDir = resolve(args['artifacts-dir'] || join(phoenixDir, 'artifacts', 'oss-phoenix-artifacts'));
   const sequenceFile = resolve(args['sequence-file'] || join(artifactsDir, 'example_sequence.json'));
   const corpusFile = resolve(args['corpus-file'] || join(artifactsDir, 'sports_corpus.npz'));
@@ -140,8 +149,17 @@ function buildRealAuditEvent(args) {
     modelArtifacts.push({ path: relativePosix(xDir, corpusFile), sha256: fileSha256(corpusFile) });
   }
 
-  const outputLines = run.stdout.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
-  const openedOutputs = outputLines.slice(0, Math.min(outputLines.length, topKDisplay));
+  const stdoutLineItems = buildStdoutLineItems(run.stdout);
+  const openedStdoutLines = stdoutLineItems.slice(0, Math.min(stdoutLineItems.length, topKDisplay));
+  const rankedItems = parsePhoenixRankingOutput(run.stdout);
+  const openedRankedItems = rankedItems.slice(0, Math.min(rankedItems.length, topKDisplay));
+  const parserWarnings = [];
+  if (rankedItems.length === 0) {
+    parserWarnings.push('no_phoenix_rank_rows_parsed');
+    if (args['require-structured']) {
+      throw new Error('real-mode parser found zero Phoenix ranking rows');
+    }
+  }
   const inputCommitments = [];
   if (existsSync(sequenceFile)) inputCommitments.push({ path: relativePosix(xDir, sequenceFile), sha256: fileSha256(sequenceFile) });
   if (existsSync(corpusFile)) inputCommitments.push({ path: relativePosix(xDir, corpusFile), sha256: fileSha256(corpusFile) });
@@ -150,8 +168,11 @@ function buildRealAuditEvent(args) {
     receipt_profile: 'recommender.post_ranking.v1',
     event_kind: 'post_ranking_audit_event',
     algorithm_repo: 'https://github.com/xai-org/x-algorithm',
-    algorithm_commit: `git:${commit}`,
-    algorithm_worktree_dirty: status.length > 0,
+    algorithm_commit: `git:${gitInfo.commit}`,
+    algorithm_worktree_dirty: gitInfo.dirty,
+    algorithm_source_note: gitInfo.note,
+    algorithm_source_files: algorithmSourceFiles,
+    algorithm_source_root: merkleRoot(algorithmSourceFiles),
     pipeline: 'phoenix/run_pipeline.py',
     execution_mode: 'real',
     run_command: [command.cmd, ...command.argv],
@@ -160,18 +181,27 @@ function buildRealAuditEvent(args) {
     config_hash: canonicalHash(modelArtifacts.filter((a) => a.path.endsWith('config.json'))),
     input_commitment: merkleRoot(inputCommitments),
     input_commitment_note: 'Merkle root over sequence/corpus references. Production deployments should commit to feature vectors before ranking.',
-    output_root: merkleRoot(outputLines.map((line, index) => ({ index, line }))),
+    output_root: merkleRoot(stdoutLineItems),
     output_top_n_optional: {
-      top_n: openedOutputs.length,
-      items: openedOutputs.map((line, index) => ({ rank: index + 1, line })),
+      top_n: openedStdoutLines.length,
+      items: openedStdoutLines.map(({ line }, index) => ({ rank: index + 1, line })),
     },
-    selected_count: outputLines.length,
+    structured_output_version: 'phoenix-table-v1',
+    ranked_items_count: rankedItems.length,
+    ranked_items_root: merkleRoot(rankedItems),
+    ranked_items_top_n_optional: {
+      top_n: openedRankedItems.length,
+      items: openedRankedItems,
+    },
+    parser_warnings: parserWarnings,
+    selected_count: rankedItems.length || stdoutLineItems.length,
+    stdout_line_count: stdoutLineItems.length,
     stdout_hash: sha256Prefixed(Buffer.from(run.stdout, 'utf8')),
     stderr_hash: sha256Prefixed(Buffer.from(run.stderr || '', 'utf8')),
     top_k_retrieval: topKRetrieval,
     top_k_display: topKDisplay,
     runtime_environment: {
-      wrapper: 'ScopeBlind/x-algorithm-receipts@0.1.0',
+      wrapper: WRAPPER_VERSION,
       node: process.version,
       platform: process.platform,
       arch: process.arch,
@@ -203,18 +233,69 @@ function collectArtifactHashes(artifactsDir, xDir) {
     .map((path) => ({ path: relativePosix(xDir, path), sha256: fileSha256(path) }));
 }
 
+function collectSourceHashes(xDir) {
+  return listFilesRecursive(xDir, { maxFiles: 5000, skipLargeBytes: 50 * 1024 * 1024 })
+    .filter((path) => !relativePosix(xDir, path).startsWith('phoenix/artifacts/'))
+    .filter((path) => /\.(py|rs|ts|js|json|toml|yaml|yml|md|lock)$/i.test(path))
+    .map((path) => ({ path: relativePosix(xDir, path), sha256: fileSha256(path) }));
+}
+
 function buildOpening(event) {
   return {
     receipt_profile: event.receipt_profile,
     algorithm_commit: event.algorithm_commit,
     output_root: event.output_root,
     output_top_n_optional: event.output_top_n_optional,
+    structured_output_version: event.structured_output_version,
+    ranked_items_root: event.ranked_items_root,
+    ranked_items_top_n_optional: event.ranked_items_top_n_optional,
     caveat: event.caveat,
   };
 }
 
 function git(cwd, argv) {
-  return execFileSync('git', ['-C', cwd, ...argv], { encoding: 'utf8' }).trim();
+  return execFileSync(
+    'git',
+    ['-c', 'filter.lfs.process=', '-c', 'filter.lfs.required=false', '-c', 'filter.lfs.smudge=', '-C', cwd, ...argv],
+    { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] },
+  ).trim();
+}
+
+function gitOrNull(cwd, argv) {
+  try {
+    return git(cwd, argv);
+  } catch {
+    return null;
+  }
+}
+
+function resolveAlgorithmGitInfo(xDir, args) {
+  if (args['algorithm-commit']) {
+    return {
+      commit: String(args['algorithm-commit']).replace(/^git:/, ''),
+      dirty: null,
+      note: 'algorithm_commit was supplied explicitly by the receipt wrapper caller.',
+    };
+  }
+
+  const topLevel = gitOrNull(xDir, ['rev-parse', '--show-toplevel']);
+  const commit = gitOrNull(xDir, ['rev-parse', 'HEAD']);
+  if (topLevel && commit && resolve(topLevel) === resolve(xDir)) {
+    const status = gitOrNull(xDir, ['status', '--porcelain']);
+    return {
+      commit,
+      dirty: status === null ? null : status.length > 0,
+      note: status === null
+        ? 'algorithm source was a git checkout, but dirty-state inspection failed; algorithm_source_root still binds the source files.'
+        : 'algorithm source was a standalone git checkout.',
+    };
+  }
+
+  return {
+    commit: 'unknown-source-tree',
+    dirty: null,
+    note: 'algorithm directory was not a standalone git checkout; algorithm_source_root binds the source files that were executed.',
+  };
 }
 
 function parseArgs(argv) {
@@ -225,6 +306,8 @@ function parseArgs(argv) {
     const key = item.slice(2);
     if (key === 'mock') {
       out.mock = true;
+    } else if (key === 'require-structured') {
+      out['require-structured'] = true;
     } else {
       const value = argv[++i];
       if (value === undefined) throw new Error(`missing value for --${key}`);

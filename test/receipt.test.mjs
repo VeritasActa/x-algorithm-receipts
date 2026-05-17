@@ -3,6 +3,7 @@ import { generateKeyPairSync } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { canonicalize, merkleRoot, publicJwksFromPrivateJwk, signReceipt, verifyReceiptLocally } from '../scripts/lib.mjs';
+import { buildStdoutLineItems, parsePhoenixRankingOutput } from '../scripts/phoenix-parser.mjs';
 
 test('canonicalize sorts keys recursively', () => {
   assert.equal(canonicalize({ b: 2, a: { d: 4, c: 3 } }), '{"a":{"c":3,"d":4},"b":2}');
@@ -22,8 +23,11 @@ test('committed demo receipt has the expected recommender profile', () => {
   assert.equal(receipt.payload.receipt_profile, 'recommender.post_ranking.v1');
   assert.equal(receipt.payload.algorithm_repo, 'https://github.com/xai-org/x-algorithm');
   assert.match(receipt.payload.output_root, /^merkle-rfc6962-sha256:[0-9a-f]{64}$/);
+  assert.match(receipt.payload.ranked_items_root, /^merkle-rfc6962-sha256:[0-9a-f]{64}$/);
   assert.equal(receipt.payload.output_top_n_optional.top_n, 10);
   assert.equal(receipt.payload.output_top_n_optional.items.length, 10);
+  assert.equal(receipt.payload.ranked_items_top_n_optional.top_n, 10);
+  assert.equal(receipt.payload.ranked_items_top_n_optional.items.length, 10);
 });
 
 test('signReceipt output verifies with the matching JWKS public key', () => {
@@ -34,4 +38,37 @@ test('signReceipt output verifies with the matching JWKS public key', () => {
   const { artifact } = signReceipt('recommender_rank_receipt', { receipt_profile: 'recommender.post_ranking.v1' }, privateJwk, { issued_at: '2026-05-16T00:00:00Z' });
   const jwks = publicJwksFromPrivateJwk(privateJwk);
   assert.equal(verifyReceiptLocally(artifact, jwks.keys[0]), true);
+});
+
+test('Phoenix parser extracts structured ranked rows from pipeline stdout', () => {
+  const stdout = `
+PIPELINE RESULTS - User 12345
+Rank  Score    Ret     Fav     Reply   RT      Dwell   VQV     Topics                         Post URL
+1     0.3922   0.8980  0.2930  0.0003  0.0114  0.4785  0.0781  Sports,NBA                     https://x.com/a/status/2055371034010726771
+2     0.3010   0.7070  0.2010  0.0040  0.0100  0.3890  0.0550  -                              https://x.com/a/status/2055371034010726772
+`;
+  const rows = parsePhoenixRankingOutput(stdout);
+  assert.equal(rows.length, 2);
+  assert.deepEqual(rows[0], {
+    rank: 1,
+    post_url: 'https://x.com/a/status/2055371034010726771',
+    post_id: '2055371034010726771',
+    score: 0.3922,
+    retrieval_score: 0.898,
+    favorite_probability: 0.293,
+    reply_probability: 0.0003,
+    repost_probability: 0.0114,
+    dwell_probability: 0.4785,
+    vqv_score: 0.0781,
+    topics: ['Sports', 'NBA'],
+  });
+  assert.deepEqual(rows[1].topics, []);
+});
+
+test('stdout line builder preserves a stable line-indexed byte disclosure view', () => {
+  const items = buildStdoutLineItems(' A \n\n B \n');
+  assert.deepEqual(items, [
+    { index: 0, line: 'A' },
+    { index: 1, line: 'B' },
+  ]);
 });
